@@ -8,12 +8,13 @@ const debugError = require('debug')('tuya-mqtt:error')
 const SimpleSwitch = require('./devices/simple-switch')
 const SimpleDimmer = require('./devices/simple-dimmer')
 const RGBTWLight = require('./devices/rgbtw-light')
+const ComputerPowerSwitch = require('./devices/computer-power-switch')
 const GenericDevice = require('./devices/generic-device')
 const GenericSubDevice = require('./devices/generic-subdevice')
 const utils = require('./lib/utils')
 
-var CONFIG = undefined
-var tuyaDevices = new Array()
+let CONFIG = undefined;
+const tuyaDevices = [];
 
 // Setup Exit Handlers
 process.on('exit', processExit.bind(0))
@@ -47,6 +48,9 @@ function getDevice(configDevice, mqttClient) {
             break;
         case 'RGBTWLight':
             return new RGBTWLight(deviceInfo)
+            break;
+        case 'ComputerPowerSwitch':
+            return new ComputerPowerSwitch(deviceInfo)
             break;
     }
     return new GenericDevice(deviceInfo)
@@ -111,7 +115,7 @@ const main = async() => {
     }
 
     try {
-        configDevices = fs.readFileSync('./devices.conf', 'utf8')
+        configDevices = fs.readFileSync('./devices.json', 'utf8')
         configDevices = json5.parse(configDevices)
     } catch (e) {
         console.error('Devices file not found!')

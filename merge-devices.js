@@ -19,7 +19,7 @@ async function processExit(exitCode) {
 const main = async() => {
     const date = new Date();
     const dateTimeStr = date.getFullYear() + '-' + ("0" + (date.getMonth() + 1)).slice(-2) + '-' + ("0" + date.getDate()).slice(-2) + '_' + ("0" + date.getHours()).slice(-2) + ("0" + date.getMinutes()).slice(-2) + ("0" + date.getSeconds()).slice(-2);
-    const configDevicesFilename = 'devices.conf';
+    const configDevicesFilename = 'devices.json';
     const configDevicesBackupFilename = `${configDevicesFilename}_${dateTimeStr}.bak`;
     const configNewDevicesFilename = `new-${configDevicesFilename}`;
 
