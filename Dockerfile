@@ -15,7 +15,7 @@ ARG BUILD_REVISION
 
 #RUN sed -i -e "s#__DEV_DIRTY__#${BUILD_VERSION}-${BUILD_REVISION}#g" src/main.js
 
-CMD ["/nodejs/bin/node", "--enable-source-maps", "/app/src/tuya-mqtt.js"]
+CMD ["node", "--enable-source-maps", "/app/src/tuya-mqtt.js"]
 
 
 #FROM gcr.io/distroless/nodejs22-debian12
