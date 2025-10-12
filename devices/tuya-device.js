@@ -14,6 +14,10 @@ class TuyaDevice {
         this.config = deviceInfo.configDevice
         this.mqttClient = deviceInfo.mqttClient
         this.topic = deviceInfo.topic
+        this.bridgeId = deviceInfo.bridgeId || 'tuya-mqtt'
+        // this.bridgeId = deviceInfo.bridgeId || 'tuya-mqtt'
+        // this.bridgeId = deviceInfo.bridgeId
+        // this.bridgeId = deviceInfo.bridgeId || 'tuya-mqtt'
         this.connected = false
         this.heartbeatTimer = 0
 
@@ -34,12 +38,13 @@ class TuyaDevice {
             }
         }
 
-        // Set default device data for Home Assistant device registry
+        // Set default device data for Home Assistant device registry  
         // Values may be overridden by individual devices
         this.deviceData = { 
             ids: [ this.config.id ],
             name: (this.config.name) ? this.config.name : this.config.id,
-            mf: 'Tuya'
+            mf: 'Tuya',
+            via_device: this.bridgeId
         }
 
         // Initialize properties to hold cached device state data

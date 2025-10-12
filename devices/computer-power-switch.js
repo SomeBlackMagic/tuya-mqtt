@@ -3,6 +3,10 @@ const debug = require('debug')('tuya-mqtt:device')
 const debugDiscovery = require('debug')('tuya-mqtt:discovery')
 const utils = require('../lib/utils')
 
+/**
+ * @typedef {import('../types/device-data').DeviceData} DeviceData
+ */
+
 class ComputerPowerSwitch extends TuyaDevice {
     async init() {
         // Initialize state storage
@@ -16,8 +20,18 @@ class ComputerPowerSwitch extends TuyaDevice {
         this.config.dpsResetMode = this.config.dpsResetMode ? this.config.dpsResetMode : 101
         this.config.dpsRFRemote = this.config.dpsRFRemote ? this.config.dpsRFRemote : 102
 
-        this.deviceData.mdl = 'Computer Power Switch'
-        this.deviceData.mf = 'Tuya/eWeLink'
+        // Initialize device data according to Home Assistant MQTT Discovery specification
+        /** @type {DeviceData} */
+        this.deviceData.mdl = 'JH-usb'  // Model
+        this.deviceData.mf = 'Tuya/eWeLink'  // Manufacturer
+        this.deviceData.sn = '0wwwgfhmcjepvs10'  // Serial Number (Product ID)
+        // Optional fields that can be added:
+        // this.deviceData.sw = '1.0.0'  // Software version
+        // this.deviceData.hw = '1.0'    // Hardware version
+        // this.deviceData.ids = [this.config.id]  // Device identifiers
+        // this.deviceData.name = 'Computer Power Switch'  // Device name
+        // this.deviceData.cu = 'http://192.168.1.100'  // Configuration URL
+        // this.deviceData.sa = 'Office'  // Suggested area
 
         // Map generic DPS topics to device specific topic names
         this.deviceTopics = {

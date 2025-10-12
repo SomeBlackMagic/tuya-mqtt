@@ -37,7 +37,8 @@ function getDevice(configDevice, mqttClient) {
     const deviceInfo = {
         configDevice: configDevice,
         mqttClient: mqttClient,
-        topic: CONFIG.topic
+        topic: CONFIG.topic,
+        bridgeId: CONFIG.bridge_id
     }
     switch (configDevice.type) {
         case 'SimpleSwitch':
@@ -70,7 +71,8 @@ function initDevices(configDevices, mqttClient) {
                 const deviceInfo = {
                     configDevice: configSubDevice,
                     mqttClient: mqttClient,
-                    topic: CONFIG.topic
+                    topic: CONFIG.topic,
+                    bridgeId: CONFIG.bridge_id
                 }
                 const newSubDevice = new GenericSubDevice(newDevice, deviceInfo)
                 debug('Added subDevice ' + newSubDevice.toString() + ' to ' + newDevice.toString())
@@ -80,6 +82,94 @@ function initDevices(configDevices, mqttClient) {
         }
         newDevice.connectDevice();
     }
+}
+
+// Initialize Bridge Device in Home Assistant
+function initBridge(mqttClient) {
+    const bridgeId = CONFIG.bridge_id || 'tuya-mqtt'
+    const bridgeConfigTopic = `homeassistant/device/${bridgeId}/config`
+
+    const bridgeDiscovery = {
+        identifiers: [bridgeId],
+        name: CONFIG.bridge_name || bridgeId,
+        model: 'Tuya MQTT Bridge',
+        manufacturer: 'tuya-mqtt',
+        sw_version: require('./package.json').version || '1.0.0',
+        configuration_url: 'https://github.com/TheAgentK/tuya-mqtt'
+    }
+
+    debug('Publishing bridge discovery data')
+    mqttClient.publish(bridgeConfigTopic, JSON.stringify(bridgeDiscovery), {qos: CONFIG.qos, retain: true})
+
+    // Initialize bridge sensors
+    initBridgeSensors(mqttClient)
+}
+
+// Initialize Bridge Statistics Sensors
+function initBridgeSensors(mqttClient) {
+    const bridgeId = CONFIG.bridge_id || 'tuya-mqtt'
+    const bridgeName = CONFIG.bridge_name || bridgeId
+
+    // Uptime sensor
+    const uptimeSensorTopic = `homeassistant/sensor/${bridgeId}_uptime/config`
+    const uptimeConfig = {
+        name: `${bridgeName} Uptime`,
+        unique_id: `${bridgeId}_uptime`,
+        state_topic: `${CONFIG.topic}${bridgeId}/uptime`,
+        device_class: 'timestamp',
+        entity_category: 'diagnostic',
+        device: {
+            identifiers: [bridgeId],
+            name: bridgeName
+        }
+    }
+    mqttClient.publish(uptimeSensorTopic, JSON.stringify(uptimeConfig), {qos: CONFIG.qos, retain: true})
+
+    // Connected devices count sensor
+    const devicesCountTopic = `homeassistant/sensor/${bridgeId}_devices/config`
+    const devicesConfig = {
+        name: `${bridgeName} Connected Devices`,
+        unique_id: `${bridgeId}_devices`,
+        state_topic: `${CONFIG.topic}${bridgeId}/devices_count`,
+        icon: 'mdi:devices',
+        entity_category: 'diagnostic',
+        device: {
+            identifiers: [bridgeId],
+            name: bridgeName
+        }
+    }
+    mqttClient.publish(devicesCountTopic, JSON.stringify(devicesConfig), {qos: CONFIG.qos, retain: true})
+
+    // Status sensor
+    const statusSensorTopic = `homeassistant/sensor/${bridgeId}_status/config`
+    const statusConfig = {
+        name: `${bridgeName} Status`,
+        unique_id: `${bridgeId}_status`,
+        state_topic: `${CONFIG.topic}${bridgeId}/status`,
+        icon: 'mdi:bridge',
+        entity_category: 'diagnostic',
+        device: {
+            identifiers: [bridgeId],
+            name: bridgeName
+        }
+    }
+    mqttClient.publish(statusSensorTopic, JSON.stringify(statusConfig), {qos: CONFIG.qos, retain: true})
+}
+
+// Publish Bridge Statistics
+function publishBridgeStats(mqttClient) {
+    const bridgeId = CONFIG.bridge_id || 'tuya-mqtt'
+    const startTime = new Date().toISOString()
+
+    // Publish uptime
+    mqttClient.publish(`${CONFIG.topic}${bridgeId}/uptime`, startTime, {qos: CONFIG.qos, retain: true})
+
+    // Publish connected devices count
+    const connectedCount = tuyaDevices.filter(device => device.connected).length
+    mqttClient.publish(`${CONFIG.topic}${bridgeId}/devices_count`, connectedCount.toString(), {qos: CONFIG.qos, retain: true})
+
+    // Publish status
+    mqttClient.publish(`${CONFIG.topic}${bridgeId}/status`, 'online', {qos: CONFIG.qos, retain: true})
 }
 
 // Republish devices 2x with 30 seconds sleep if restart of HA is detected
@@ -112,6 +202,12 @@ const main = async() => {
     }
     if (typeof CONFIG.retain == 'undefined') {
         CONFIG.retain = false
+    }
+    if (typeof CONFIG.bridge_id == 'undefined') {
+        CONFIG.bridge_id = 'tuya-mqtt'
+    }
+    if (typeof CONFIG.bridge_name == 'undefined') {
+        CONFIG.bridge_name = CONFIG.bridge_id
     }
 
     try {
@@ -150,7 +246,18 @@ const main = async() => {
         mqttClient.subscribe(topic)
         mqttClient.subscribe('homeassistant/status')
         mqttClient.subscribe('hass/status')
+
+        // Initialize bridge device and sensors
+        initBridge(mqttClient)
+
+        // Start devices initialization
         initDevices(configDevices, mqttClient)
+
+        // Publish initial bridge stats
+        setTimeout(() => publishBridgeStats(mqttClient), 5000)
+
+        // Update bridge stats every 60 seconds
+        setInterval(() => publishBridgeStats(mqttClient), 60000)
     })
 
     mqttClient.on('reconnect', function (error) {
