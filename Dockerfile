@@ -13,20 +13,20 @@ ARG BUILD_TIME
 ARG BUILD_VERSION
 ARG BUILD_REVISION
 
-#RUN sed -i -e "s#__DEV_DIRTY__#${BUILD_VERSION}-${BUILD_REVISION}#g" src/main.js
+RUN sed -i -e "s#__DEV_DIRTY__#${BUILD_VERSION}-${BUILD_REVISION}#g" src/main.ts
 
-CMD ["node", "--enable-source-maps", "/app/src/tuya-mqtt.js"]
+RUN npm run build
 
 
-#FROM gcr.io/distroless/nodejs22-debian12
-#
-#COPY --from=busybox:1.35.0-uclibc /bin/sh /bin/sh
-#COPY --from=busybox:1.35.0-uclibc /bin/tar /bin/tar
-#
-#COPY --from=build-env /app/dist /app
-#COPY --from=build-env /app/node_modules /app/node_modules
-#
-#ENTRYPOINT []
-#
+FROM gcr.io/distroless/nodejs22-debian12
+
+COPY --from=busybox:1.35.0-uclibc /bin/sh /bin/sh
+COPY --from=busybox:1.35.0-uclibc /bin/tar /bin/tar
+
+COPY --from=build-env /app/dist /app
+COPY --from=build-env /app/node_modules /app/node_modules
+
+ENTRYPOINT []
+CMD ["node", "--enable-source-maps", "/app/main.js"]
 
 
