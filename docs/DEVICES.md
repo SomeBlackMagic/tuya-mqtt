@@ -17,12 +17,13 @@ the [generic device template](#generic-device-templates) feature.
 Pre-defined device templates (except for the Generic Device) will always expose friendly topics for the given device in
 a consistent manner. Currently the following pre-defined device templates are available:
 
-| Device Type   | Descrition                                                          |
-|---------------|---------------------------------------------------------------------|
-| SimpleSwitch  | Supports simple on/off devices                                      |
-| SimpleDimmer  | Supports simple devices with on/on and brightness                   |
-| RGBTWLight    | Supports color/white lights with optional color temperature support |
-| GenericDevice | Allows defining a custom template for any device                    |
+| Device Type         | Descrition                                                                                       |
+|---------------------|--------------------------------------------------------------------------------------------------|
+| ComputerPowerSwitch | Supports remote power control for computers and similar devices with simple on/off functionality |
+| SimpleSwitch        | Supports simple on/off devices                                                                   |
+| SimpleDimmer        | Supports simple devices with on/on and brightness                                                |
+| RGBTWLight          | Supports color/white lights with optional color temperature support                              |
+| GenericDevice       | Allows defining a custom template for any device                                                 |
 
 To use a device template, simply add the "type" option to the devices.conf similar to the following example:
 

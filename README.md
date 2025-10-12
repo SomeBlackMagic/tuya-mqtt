@@ -2,17 +2,12 @@ This is a fork of https://github.com/TheAgentK/tuya-mqtt and https://github.com/
 I changed the mqtt topic names structure, so compatibility might be broken. It also relies on my fork of TuyAPI.
 Otherwise, I tried to keep it compatible with the original version.
 
-## Supported Devices
-This project supports various Tuya devices including:
-- Computer Power Switches (JH-usb model)
-- Standard switches and dimmers
-- Various other Tuya-compatible IoT devices
 
-Below is the description from the original repo.
+
 # tuya-mqtt
 
 # !!!! Important Note !!!!
-This project is currently in maintainance mode.  No further enhancements to this project are planned and will not be planned for the future unless someone out there is interested in becoming the new maintainer.  Please do not open issues to request new features, new device support, etc, as they will likely be closed with no comment.  I will try to support existing functionality, but even this will likely be on a very limited basis.  If you are interested in maintaining this project, please post [here](https://github.com/rospogrigio/localtuya/issues/194).
+This project is currently in maintenance mode.  No further enhancements to this project are planned and will not be planned for the future unless someone out there is interested in becoming the new maintainer.  Please do not open issues to request new features, new device support, etc, as they will likely be closed with no comment.  I will try to support existing functionality, but even this will likely be on a very limited basis.  If you are interested in maintaining this project, please post [here](https://github.com/rospogrigio/localtuya/issues/194).
 
 I have decided to step away from this project as I've made the personal decision to rid myself of any Tuya Wifi based devices (I'm down to only 4 at this point, and they are all easy to replace or at least flash with Tasmota).  This decision was made due to the fact that Tuya continues to make it more and more difficult to control their devices locally.  While I don't blame them for this, these devices were only interesting to me because of this local control and thus I can no longer meet my personal goals with Tuya devices (at least the Wifi ones) so I will no longer be purchasing/using them going forward.
 
@@ -27,6 +22,8 @@ To acquire keys for your device please see the instructions at the TuyAPI projec
 
 **!!!!!!!!!! Important information regarding the 3.0 release !!!!!!!!!!**\
 The 3.0.0 release (Oct 17th, 2020) is a major refactor of the tuya-mqtt project and, as such, is a breaking release for all users of previous versions.  Almost everything about the project is different, including configuration method, topic names, etc.  Upgrading users should carefully read the instructions below and assume they are starting over from scratch.
+
+## [Supported Devices](docs/DEVICES.md)
 
 ## Installation
 Download this project to your system into any directory (example below uses /opt/tuya-mqtt) and install tuyapi from the same folder that the tuya-mqtt.js is in
@@ -98,9 +95,9 @@ DEBUG=tuya-mqtt:* tuya-mqtt.js
 ```
 
 ### Updating devices.conf with new and/or changed devices:
-After adding or changing devices to your Tuya account the devices.conf file can be automatically updated with all new devices and name/key changes by using the merge-devices.js script.  Create a file named new-devices.conf with the new "tuya-cli wizard" output then run ```node merge-devices.js```.  A dated backup of the original devices.conf file will be created automatically before changes are made.  Devices are only added and updated, never removed.  The resulting devices.conf file will be neatly formatted and sorted alphabetically by device name.
+After adding or changing devices to your Tuya account, the devices.conf file can be automatically updated with all new devices and name/key changes by using the merge-devices.js script.  Create a file named new-devices.conf with the new "tuya-cli wizard" output then run ```node merge-devices.js```.  A dated backup of the original devices.conf file will be created automatically before changes are made.  Devices are only added and updated, never removed.  The resulting devices.conf file will be neatly formatted and sorted alphabetically by device name.
 
-To prevent device entries from being updated by the merge script, add property "allowMerge: false" to the device definition in the devices.conf file.
+To prevent device entries from being updated by the merge script, add the property "allowMerge: false" to the device definition in the devices.conf file.
 
 ### Usage Overview
 Tuya devices work by mapping device functions to various values stored in data points (referred to as DPS values) which are referenced via an index number, referred to as the DPS key.  For example, a simple on/off switch may have a single DPS value, stored in DPS kep 1 (DPS1).  This value is likely to have a setting of true/false representing the on/off state of the device.  The device state can be read via DPS1, and, for values that can be changed (some DPS values are read-only), sending true/false to DPS1 will turn the device on/off.  A simple dimmer might have the same DPS1 value, but an additional DPS2 value from 1-255 representing the state of the dimmer.  More complex devices use more DPS keys with various values representing the states and control functions of the device.
