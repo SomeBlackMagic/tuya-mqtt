@@ -32,7 +32,7 @@ async function processExit(exitCode) {
     process.exit()
 }
 
-// Get new deivce based on configured type
+// Get new device based on configured type
 function getDevice(configDevice, mqttClient) {
     const deviceInfo = {
         configDevice: configDevice,
@@ -90,7 +90,7 @@ function initBridge(mqttClient) {
         name: CONFIG.bridge_name || bridgeId,
         model: 'Tuya MQTT Bridge',
         manufacturer: 'tuya-mqtt',
-        sw_version: require('./package.json').version || '1.0.0',
+        sw_version: require(process.cwd() +'/package.json').version || '1.0.0',
         configuration_url: 'https://github.com/SomeBlackMagic/tuya-mqtt'
     }
 
@@ -186,7 +186,7 @@ const main = async() => {
     let mqttClient
 
     try {
-        CONFIG = require('./config')
+        CONFIG = require(process.cwd() + '/config')
     } catch (e) {
         console.error('Configuration file not found!')
         debugError(e)
@@ -207,7 +207,7 @@ const main = async() => {
     }
 
     try {
-        configDevices = fs.readFileSync('./devices.json', 'utf8')
+        configDevices = fs.readFileSync(process.cwd() + '/devices.json', 'utf8')
         configDevices = json5.parse(configDevices)
     } catch (e) {
         console.error('Devices file not found!')

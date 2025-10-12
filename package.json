@@ -3,15 +3,9 @@
   "version": "3.1.0",
   "description": "Control Tuya devices locally via MQTT",
   "homepage": "https://github.com/Ilia-SB/tuya-mqtt",
-  "main": "tuya-mqtt.js",
+  "main": "src/tuya-mqtt.js",
   "files": [
-    "devices/*",
-    "lib/*",
-    "config.json.sample",
-    "license",
-    "merge-devices.js",
-    "readme.md",
-    "tuya-mqtt.js"
+    "src/*"
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
