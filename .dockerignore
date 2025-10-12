@@ -1,0 +1,10 @@
+.github
+.gitignore
+CHANGELOG.md
+Dockerfile
+LICENSE
+README.md
+config.json.sample
+docs
+merge-devices.js
+types

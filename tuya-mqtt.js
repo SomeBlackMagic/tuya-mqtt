@@ -43,16 +43,12 @@ function getDevice(configDevice, mqttClient) {
     switch (configDevice.type) {
         case 'SimpleSwitch':
             return new SimpleSwitch(deviceInfo)
-            break;
         case 'SimpleDimmer':
             return new SimpleDimmer(deviceInfo)
-            break;
         case 'RGBTWLight':
             return new RGBTWLight(deviceInfo)
-            break;
         case 'ComputerPowerSwitch':
             return new ComputerPowerSwitch(deviceInfo)
-            break;
     }
     return new GenericDevice(deviceInfo)
 }
@@ -95,7 +91,7 @@ function initBridge(mqttClient) {
         model: 'Tuya MQTT Bridge',
         manufacturer: 'tuya-mqtt',
         sw_version: require('./package.json').version || '1.0.0',
-        configuration_url: 'https://github.com/TheAgentK/tuya-mqtt'
+        configuration_url: 'https://github.com/SomeBlackMagic/tuya-mqtt'
     }
 
     debug('Publishing bridge discovery data')

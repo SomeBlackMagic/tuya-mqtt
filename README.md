@@ -1,6 +1,12 @@
-This is a fork of https://github.com/TheAgentK/tuya-mqtt modified to work with devices connected via tuya-hub. Only tested with a small number of devices I own.
-I changed the mqtt topic names structure, so compatability might be broken. It also relies on my fork of TuyAPI.
+This is a fork of https://github.com/TheAgentK/tuya-mqtt and https://github.com/Ilia-SB/tuya-mqtt modified to work with devices connected via tuya-hub. Only tested with a small number of devices I own.
+I changed the mqtt topic names structure, so compatibility might be broken. It also relies on my fork of TuyAPI.
 Otherwise, I tried to keep it compatible with the original version.
+
+## Supported Devices
+This project supports various Tuya devices including:
+- Computer Power Switches (JH-usb model)
+- Standard switches and dimmers
+- Various other Tuya-compatible IoT devices
 
 Below is the description from the original repo.
 # tuya-mqtt
@@ -29,7 +35,7 @@ Download this project to your system into any directory (example below uses /opt
 cd /opt
 
 // clone this project
-git clone https://github.com/TheAgentK/tuya-mqtt
+git clone https://github.com/SomeBlackMagic/tuya-mqtt
 
 // change directory to the project directory
 cd tuya-mqtt
@@ -50,20 +56,30 @@ Edit config.json with your MQTT broker settings and save:
 nano config.json 
 ```
 
-### Setting up devices.conf:
+### Setting up devices.json:
 If you use the "tuya-cli wizard" method to acquire your device keys you can leverage the output of this tool as the start of your devices.conf file.  Otherwise, you want to create a file using a formate like this:
 ```
 [
-  {
-    name: 'Tuya Device 1',
-    id: '86435357d8b123456789',
-    key: '8b2a69c9876543210'
-  },
-  {
-    name: 'Tuya Device 2',
-    id: 'eb532eea7d12345678abc',
-    key: '899810012345678'
-  }
+    {
+        "name": "Home PC",
+        "type": "ComputerPowerSwitch",
+        "ip": "192.168.**.*",
+        "id": "86435357d8b123456789",
+        "key": "8b2a69c9876543210",
+        "version": 3.5,
+        "issueRefreshOnConnect": true,
+        "nullPayloadOnJSONError": false
+    },
+    {
+        name: 'Tuya Device 1',
+        id: '86435357d8b123456789',
+        key: '8b2a69c9876543210'
+    },
+    {
+        name: 'Tuya Device 2',
+        id: 'eb532eea7d12345678abc',
+        key: '899810012345678'
+    }
 ]
 ```
 Note that, because the format is JSON5, which is a superset of JSON, you can use standard, strict JSON syntax, or the more forgiving JSON5 format, or even mix and match in the same file.
@@ -148,6 +164,8 @@ Not all Tuya protocols are supported.  For example, some devices use protocol 3.
 openHAB examples are [here](docs/openHAB.md).
 
 ## Contributors
+- [wirwolf](https://github.com/wirwolf)
+- [Ilia-SB](https://github.com/Ilia-SB/tuya-mqtt)
 - [TheAgentK](https://github.com/TheAgentK)
 - [tsightler](https://github.com/tsightler)
 - [Tycale](https://github.com/Tycale)
