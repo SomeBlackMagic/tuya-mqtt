@@ -1,6 +1,6 @@
 import { Utils } from './utils';
 import { DeviceConfig, TuyaCommand, DeviceData, SubDevice } from './types';
-import { DeviceConnectionHandler } from './handlers/device-connection.handler';
+import {DeviceConnectionHandler, TuyaDeviceOptions} from './handlers/device-connection.handler';
 import { DeviceStateHandler } from './handlers/device-state.handler';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { HomeAssistantService } from '../homeassistant/homeassistant.service';
@@ -18,20 +18,17 @@ import { Logger } from '@nestjs/common';
 
 export class TuyaDevice {
   private readonly logger = new Logger('TuyaDevice');
-  protected config: DeviceConfig;
-  protected options: any;
+
+  protected options: TuyaDeviceOptions;
   protected deviceData: DeviceData;
   protected subDevices: Record<string, SubDevice> = {};
 
   // Handlers
   private connectionHandler: DeviceConnectionHandler;
   private stateHandler: DeviceStateHandler;
-
-  // Device-specific driver (optional)
   private deviceDriver: BaseDeviceDriver;
-  private eventEmitter: EventEmitter2;
-  private readonly _baseRoute: string;
-  private homeAssistantService?: HomeAssistantService;
+
+
 
   // Callbacks for external integration
   private onStateChangedCallback?: (
@@ -42,15 +39,11 @@ export class TuyaDevice {
   private onDeviceDisconnectedCallback?: (deviceId: string) => void;
 
   constructor(
-    config: DeviceConfig,
-    eventEmitter: EventEmitter2,
-    baseRoute: string,
-    homeAssistantService?: HomeAssistantService,
+      protected readonly config: DeviceConfig,
+      private readonly eventEmitter: EventEmitter2,
+      private readonly _baseRoute: string,
+      private readonly homeAssistantService?: HomeAssistantService,
   ) {
-    this.config = config;
-    this.eventEmitter = eventEmitter;
-    this._baseRoute = baseRoute;
-    this.homeAssistantService = homeAssistantService;
 
     this.buildDeviceOptions();
     this.setupDeviceData();
@@ -93,9 +86,9 @@ export class TuyaDevice {
       issueRefreshOnConnect: false,
     };
 
-    if (this.config.name) {
-      this.options.name = Utils.sanitizeName(this.config.name);
-    }
+    // if (this.config.name) {
+    //   this.options.name = Utils.sanitizeName(this.config.name);
+    // }
 
     if (this.config.ip) {
       this.options.ip = this.config.ip;
@@ -337,10 +330,6 @@ export class TuyaDevice {
     return this.connectionHandler.isConnected();
   }
 
-  get baseRoute(): string {
-    return this._baseRoute;
-  }
-
   // Backward compatibility alias
   get baseMqttTopic(): string {
     return this._baseRoute;
@@ -350,7 +339,7 @@ export class TuyaDevice {
     return this.deviceDriver;
   }
 
-  // Get current device state
+  // Get the current device state
   getDpsValue(key: string): any {
     return this.stateHandler.getDpsValue(key);
   }

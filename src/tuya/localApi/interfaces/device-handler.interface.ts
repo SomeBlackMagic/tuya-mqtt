@@ -1,4 +1,4 @@
-import { DeviceTopic, TuyaCommand, ColorState, DpsData } from '../types';
+import { TuyaCommand, DpsData } from '../types';
 
 export interface IDeviceConnectionHandler {
   connect(): Promise<void>;
@@ -16,19 +16,4 @@ export interface IDeviceStateHandler {
   getAllDps(): Record<string, DpsData>;
   restoreState(): void;
   saveState(): void;
-}
-
-export interface IDeviceMqttHandler {
-  publishTopics(): void;
-  processCommand(message: string): void;
-  processDpsCommand(message: string): void;
-  processDpsKeyCommand(message: string, dpsKey: string): void;
-  publishMqtt(topic: string, message: string, options?: any): void;
-}
-
-export interface IDeviceColorHandler {
-  updateColorState(value: string): void;
-  parseColorCommand(command: string, components: string): string;
-  setLight(topic: DeviceTopic, command: TuyaCommand): Promise<void>;
-  getColorState(): ColorState;
 }
