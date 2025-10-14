@@ -1,10 +1,14 @@
-import { DeviceConfig } from '../types';
+import {
+  DeviceConfig,
+  DeviceNetworkInfo,
+  DeviceFirmwareInfo,
+  DeviceFunctionalData,
+  DeviceMetadata, DpsSchemaItem,
+} from '../types';
 import {
   DeviceMessageRoute,
   DeviceDriverCallbacks,
 } from '../../messaging/messaging.types';
-import { HomeAssistantService } from '../../homeassistant/homeassistant.service';
-import { HomeAssistantDeviceInfo } from '../../homeassistant/homeassistant.types';
 
 const debug = require('debug')('tuya-mqtt:device');
 
@@ -19,44 +23,51 @@ export type { DeviceDriverCallbacks };
  */
 export abstract class BaseDeviceDriver {
   protected config: DeviceConfig;
-  protected baseRoute: string;
   protected state: Record<string, any> = {};
-  protected deviceData: HomeAssistantDeviceInfo;
   protected callbacks: DeviceDriverCallbacks;
-  protected homeAssistantService?: HomeAssistantService;
+
+  // Device information from Tuya (3, 4, 5, 6)
+  protected networkInfo: DeviceNetworkInfo;
+  protected firmwareInfo: DeviceFirmwareInfo;
+  protected functionalData: DeviceFunctionalData;
+  protected metadata: DeviceMetadata;
 
   // Device-specific route mappings
   protected deviceRoutes: Record<string, DeviceTopicDefinition> = {};
 
   constructor(
     config: DeviceConfig,
-    baseRoute: string,
-    deviceData: HomeAssistantDeviceInfo,
     callbacks: DeviceDriverCallbacks,
-    homeAssistantService?: HomeAssistantService,
   ) {
     this.config = config;
-    this.baseRoute = baseRoute;
-    this.deviceData = deviceData;
     this.callbacks = callbacks;
-    this.homeAssistantService = homeAssistantService;
+
+    // Initialize device information structures
+    this.networkInfo = {
+      connectionStatus: 'offline',
+      ip: config.ip,
+    };
+
+    this.firmwareInfo = {
+      protocolVersion: config.version,
+    };
+
+    this.functionalData = {
+      dpsSchema: {},
+      standardFunctions: [],
+      customFunctions: [],
+    };
+
+    this.metadata = {
+      name: config.name,
+      deviceType: config.type,
+    };
   }
 
   /**
    * Initialize device-specific configuration and discovery
    */
   abstract init(): Promise<void>;
-
-  /**
-   * Initialize Home Assistant discovery for all device entities
-   * Only called if homeAssistantService is available
-   */
-  protected abstract initDiscovery(): void;
-
-  /**
-   * Get icon for specific entity
-   */
-  protected abstract getIcon(entityId: string): string;
 
   /**
    * Update device state from DPS data
@@ -128,9 +139,8 @@ export abstract class BaseDeviceDriver {
       publishValue = String(dpsValue);
     }
 
-    const stateRoute = `${this.baseRoute}${route}`;
-    debug(`Publishing state to ${stateRoute}: ${publishValue}`);
-    this.callbacks.publishMessage(stateRoute, publishValue);
+    debug(`Publishing state to ${route}: ${publishValue}`);
+    this.callbacks.publishMessage(route, publishValue);
   }
 
   /**
@@ -186,108 +196,6 @@ export abstract class BaseDeviceDriver {
     this.callbacks.publishMessage(route, message, retain);
   }
 
-  // Backward compatibility alias
-  protected publishMqtt(
-    topic: string,
-    message: string,
-    retain: boolean = true,
-  ): void {
-    this.publishMessage(topic, message, retain);
-  }
-
-  /**
-   * Helper methods for Home Assistant discovery
-   * These methods delegate to HomeAssistantService if available
-   */
-  protected publishSwitchDiscovery(
-    entityId: string,
-    name: string,
-    description?: string,
-  ): void {
-    if (!this.homeAssistantService) {
-      debug('HomeAssistantService not available, skipping discovery');
-      return;
-    }
-
-    this.homeAssistantService.publishSwitchDiscovery(
-      this.config.id,
-      entityId,
-      name,
-      this.baseRoute,
-      this.deviceData,
-      this.getIcon(entityId),
-    );
-  }
-
-  protected publishSelectDiscovery(
-    entityId: string,
-    name: string,
-    description: string,
-    options: string[],
-  ): void {
-    if (!this.homeAssistantService) {
-      debug('HomeAssistantService not available, skipping discovery');
-      return;
-    }
-
-    this.homeAssistantService.publishSelectDiscovery(
-      this.config.id,
-      entityId,
-      name,
-      this.baseRoute,
-      this.deviceData,
-      options,
-      this.getIcon(entityId),
-    );
-  }
-
-  protected publishButtonDiscovery(
-    entityId: string,
-    name: string,
-    description?: string,
-  ): void {
-    if (!this.homeAssistantService) {
-      debug('HomeAssistantService not available, skipping discovery');
-      return;
-    }
-
-    this.homeAssistantService.publishButtonDiscovery(
-      this.config.id,
-      entityId,
-      name,
-      this.baseRoute,
-      this.deviceData,
-      this.getIcon(entityId),
-    );
-  }
-
-  protected publishSensorDiscovery(
-    entityId: string,
-    name: string,
-    options: {
-      unit_of_measurement?: string;
-      device_class?: string;
-      state_class?: string;
-      icon?: string;
-    } = {},
-  ): void {
-    if (!this.homeAssistantService) {
-      debug('HomeAssistantService not available, skipping discovery');
-      return;
-    }
-
-    this.homeAssistantService.publishSensorDiscovery(
-      this.config.id,
-      entityId,
-      name,
-      this.baseRoute,
-      this.deviceData,
-      {
-        ...options,
-        icon: options.icon || this.getIcon(entityId),
-      },
-    );
-  }
 
   /**
    * Get all device routes
@@ -301,22 +209,19 @@ export abstract class BaseDeviceDriver {
     return this.getDeviceRoutes();
   }
 
-  /**
-   * Get state for specific route
-   */
-  getState(route: string): any {
-    const routeDef = this.deviceRoutes[route];
-    if (!routeDef) return undefined;
 
-    // Try both numeric and string keys since DPS keys can come as either
-    const dpsKey = String(routeDef.key);
-    return this.state[dpsKey] ?? this.state[routeDef.key];
+  // ------------- NEW--------
+  protected addFunctionalDataDpsSchema(id: number, dpsSchema: DpsSchemaItem): void {
+    // @ts-ignore
+    if(this.functionalData.dpsSchema[id] !== undefined) {
+      return;
+    }
+    // @ts-ignore
+    this.functionalData.dpsSchema[id] = dpsSchema;
   }
 
-  /**
-   * Get all state
-   */
-  getAllState(): Record<string, any> {
-    return { ...this.state };
+  protected getFunctionalDataDpsSchema(id: number): DpsSchemaItem|null {
+    // @ts-ignore
+    return this.functionalData.dpsSchema[id] ?? null;
   }
 }

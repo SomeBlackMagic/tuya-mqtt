@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { TuyaConfig } from '../types/tuya.types';
+import { TuyaModuleConfig } from '../types/tuya.types';
 
 @Injectable()
 export class TuyaConfigProvider {
-  getTuyaConfig(): TuyaConfig {
+  getTuyaConfig(): TuyaModuleConfig {
     return {
       baseTopic: 'tuya/',
     };

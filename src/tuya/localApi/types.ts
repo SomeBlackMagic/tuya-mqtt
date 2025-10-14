@@ -3,41 +3,21 @@ export interface DeviceConfig {
   key: string;
   name?: string;
   ip?: string;
+  port?: number;
   version?: string;
   type?: string;
-  persist?: boolean;
-  retain?: boolean;
-  allowMerge?: boolean;
   issueGetOnConnect?: boolean;
   issueRefreshOnConnect?: boolean;
   shouldWaitForResponse?: boolean;
   template?: Record<string, DeviceTopic>;
-
-  // Device specific configs
-  dpsPower?: number;
-  dpsBrightness?: number;
-  brightnessScale?: number;
-  dpsColor?: number;
-  dpsMode?: number;
-  dpsWhiteValue?: number;
-  dpsColorTemp?: number;
-  colorType?: 'hsb' | 'hsbhex';
-
-  // Computer Power Switch specific configs
-  dpsPowerSwitch?: number;
-  dpsUsbSwitch?: number;
-  dpsPowerOnBehavior?: number;
-  dpsChildLock?: number;
-  dpsResetMode?: number;
-  dpsRFRemote?: number;
 }
 
-export interface DeviceInfo {
-  configDevice: DeviceConfig;
-  eventEmitter: any;
-  topic: string;
-  bridgeId: string;
-}
+// export interface DeviceInfo {
+//   configDevice: DeviceConfig;
+//   eventEmitter: any;
+//   topic: string;
+//   bridgeId: string;
+// }
 
 export interface DeviceTopic {
   key: number;
@@ -50,22 +30,34 @@ export interface DeviceTopic {
 }
 
 export interface DpsData {
-  val: any;
+  val: TuyaDpsValue;
   updated: boolean;
 }
 
 export interface TuyaCommand {
   dps: number;
-  set: any;
+  set: TuyaDpsValue;
   cid?: string;
   shouldWaitForResponse?: boolean;
 }
 
-export interface ColorState {
-  h: number;
-  s: number;
-  b: number;
+export interface TuyaEvent {
+  dps: Record<string, TuyaDpsValue>;
+  time?: number;
+  cid?: string;
+
+  // set: any;
+  // cid?: string;
+  // shouldWaitForResponse?: boolean;
 }
+
+export type TuyaDpsValue = boolean|'0'|'1'|'on'|'off';
+
+// export interface ColorState {
+//   h: number;
+//   s: number;
+//   b: number;
+// }
 
 export interface DeviceData {
   ids: string[];
@@ -78,5 +70,5 @@ export interface DeviceData {
 export interface SubDevice {
   onConnected(): void;
   onDisconnected(): void;
-  onData(data: any): void;
+  onData(data: TuyaEvent): void;
 }

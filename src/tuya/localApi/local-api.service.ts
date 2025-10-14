@@ -5,9 +5,9 @@ import * as path from 'path';
 import * as json5 from 'json5';
 import { DeviceConfig } from './types';
 import { TuyaDevice } from './tuya-device';
-import { TuyaConfigProvider } from '../config/tuya-config.provider';
-import { BridgeConfigProvider } from '../bridge/config/bridge-config.provider';
-import { HomeAssistantService } from '../homeassistant/homeassistant.service';
+import { TuyaService } from '../tuya.service';
+import {LocalApiConfig} from "./interfaces/localApi.interface";
+import {TuyaConfigProvider} from "./config/localApi-config.provider";
 
 const debug = require('debug')('tuya-mqtt:localapi');
 const debugError = require('debug')('tuya-mqtt:error');
@@ -16,23 +16,14 @@ const debugError = require('debug')('tuya-mqtt:error');
 export class LocalApiService implements OnModuleInit, OnModuleDestroy {
   private devices: Map<string, TuyaDevice> = new Map();
   private devicesConfig: DeviceConfig[] = [];
-  private config: {
-    topic: string;
-    bridgeId: string;
-    devicesFile: string;
-  };
+  private config: LocalApiConfig;
 
   constructor(
     private readonly eventEmitter: EventEmitter2,
-    private readonly homeAssistantService: HomeAssistantService,
-    tuyaConfigProvider: TuyaConfigProvider,
-    bridgeConfigProvider: BridgeConfigProvider,
+    private readonly tuyaService: TuyaService,
+    tuyaConfigProvider : TuyaConfigProvider,
   ) {
-    this.config = {
-      topic: tuyaConfigProvider.getTuyaConfig().baseTopic,
-      bridgeId: bridgeConfigProvider.getBridgeConfig().bridgeId,
-      devicesFile: 'devices.json',
-    };
+    this.config = tuyaConfigProvider.getLocalApiConfig();
   }
 
   async onModuleInit(): Promise<void> {
@@ -47,14 +38,6 @@ export class LocalApiService implements OnModuleInit, OnModuleDestroy {
   }
 
   private setupEventListeners(): void {
-    // Listen for MQTT messages and route to appropriate devices
-    this.eventEmitter.on(
-      'mqtt.message',
-      (data: { topic: string; message: string }) => {
-        this.handleMqttMessage(data.topic, data.message);
-      },
-    );
-
     // Listen for application shutdown
     this.eventEmitter.on('app.shutdown', () => {
       this.shutdown();
@@ -64,62 +47,6 @@ export class LocalApiService implements OnModuleInit, OnModuleDestroy {
     this.eventEmitter.on('localapi.reload', () => {
       this.reloadDevicesConfig();
     });
-  }
-
-  private handleMqttMessage(topic: string, message: string): void {
-    debug('Handling MQTT message for topic:', topic, 'message:', message);
-
-    // Find which device this message is for
-    for (const device of this.devices.values()) {
-      const baseTopic = device.baseMqttTopic;
-
-      if (topic.startsWith(baseTopic)) {
-        const subtopic = topic.substring(baseTopic.length);
-        debug(
-          `Message matched device ${device.deviceId}, subtopic: ${subtopic}`,
-        );
-
-        // Check if a device has a driver and if it can handle this command
-        const driver = device.getDeviceDriver();
-        if (driver && subtopic.endsWith('/command')) {
-          const commandRoute = subtopic.substring(
-            0,
-            subtopic.length - '/command'.length,
-          );
-
-          debug(
-            `Attempting to handle command via driver, route: ${commandRoute}`,
-          );
-          // Try to let the driver handle the command
-          if (driver.processTopicCommand(message, commandRoute)) {
-            debug(
-              `Command handled by device driver for route: ${commandRoute}`,
-            );
-            break;
-          }
-          debug(
-            `Driver could not handle route: ${commandRoute}, falling back to generic handling`,
-          );
-        }
-
-        // Fall back to generic command handling
-        if (subtopic === 'command') {
-          debug('Handling generic command');
-          device.handleCommand(message);
-        } else if (subtopic === 'dps/command') {
-          debug('Handling DPS command');
-          device.handleDpsCommand(message);
-        } else if (
-          subtopic.startsWith('dps/') &&
-          subtopic.endsWith('/command')
-        ) {
-          const dpsKey = subtopic.split('/')[1];
-          debug(`Handling DPS key command for key: ${dpsKey}`);
-          device.handleDpsKeyCommand(dpsKey, message);
-        }
-        break;
-      }
-    }
   }
 
   private async initialize(): Promise<void> {
@@ -188,13 +115,12 @@ export class LocalApiService implements OnModuleInit, OnModuleDestroy {
 
   private getDevice(configDevice: DeviceConfig): TuyaDevice | null {
     try {
-      const baseTopic = `${this.config.topic}${configDevice.id}/`;
-      const device = new TuyaDevice(
-        configDevice,
-        this.eventEmitter,
-        baseTopic,
-        this.homeAssistantService,
-      );
+      // const baseTopic = `${this.tuyaService.getBaseTopic()}${configDevice.id}/`;
+      const device = new TuyaDevice(configDevice, this.eventEmitter);
+
+      // Register a device with TuyaService for MQTT handling
+      this.tuyaService.registerDevice(device);
+
       return device;
     } catch (error) {
       debugError(`Failed to create device ${configDevice.id}:`, error);
@@ -212,7 +138,7 @@ export class LocalApiService implements OnModuleInit, OnModuleDestroy {
           device.connectDevice();
 
           // Subscribe to MQTT topics for this device
-          this.subscribeToDeviceTopics(device);
+          this.tuyaService.subscribeToDeviceTopics(device);
         } catch (error) {
           debugError(
             `Failed to connect to device ${device.toString()}:`,
@@ -223,37 +149,6 @@ export class LocalApiService implements OnModuleInit, OnModuleDestroy {
     );
 
     await Promise.allSettled(connectionPromises);
-  }
-
-  private subscribeToDeviceTopics(device: TuyaDevice): void {
-    const baseTopic = device.baseMqttTopic;
-
-    // Subscribe to generic command topics
-    this.eventEmitter.emit('mqtt.subscribe', { topic: `${baseTopic}command` });
-    this.eventEmitter.emit('mqtt.subscribe', {
-      topic: `${baseTopic}dps/command`,
-    });
-
-    // Subscribe to individual DPS command topics
-    for (let dpsKey = 1; dpsKey <= 20; dpsKey++) {
-      this.eventEmitter.emit('mqtt.subscribe', {
-        topic: `${baseTopic}dps/${dpsKey}/command`,
-      });
-    }
-
-    // Subscribe to device-specific driver topics
-    const driver = device.getDeviceDriver();
-    if (driver) {
-      const deviceTopics = driver.getDeviceTopics();
-      for (const topic of deviceTopics) {
-        this.eventEmitter.emit('mqtt.subscribe', {
-          topic: `${baseTopic}${topic}/command`,
-        });
-        debug(
-          `Subscribed to device-specific topic: ${baseTopic}${topic}/command`,
-        );
-      }
-    }
   }
 
   getDeviceById(deviceId: string): TuyaDevice | undefined {
@@ -288,6 +183,9 @@ export class LocalApiService implements OnModuleInit, OnModuleDestroy {
       // Clear devices map
       this.devices.clear();
 
+      // Clear devices from TuyaService
+      this.tuyaService.clearDevices();
+
       // Reload configuration and reconnect
       await this.loadDevicesConfig();
       await this.createDevices();
@@ -321,6 +219,9 @@ export class LocalApiService implements OnModuleInit, OnModuleDestroy {
 
     await Promise.allSettled(shutdownPromises);
     this.devices.clear();
+
+    // Clear devices from TuyaService
+    this.tuyaService.clearDevices();
 
     debug('LocalApiService shutdown complete');
     this.eventEmitter.emit('localapi.shutdown');

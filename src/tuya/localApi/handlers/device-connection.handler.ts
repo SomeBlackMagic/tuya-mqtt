@@ -56,11 +56,8 @@ export class DeviceConnectionHandler implements IDeviceConnectionHandler {
     });
 
     this.device.on('data', (data: any) => this.onDataCallback?.(data));
-    // this.device.on('dp-refresh', (data: any) => this.onDataCallback?.(data));
-    this.device.on('dp-refresh', (data: any) => {
-      debug('Received dp-refresh data:', data); // add this line
-      this.onDataCallback?.(data);
-    });
+    this.device.on('dp-refresh', (data: any) => this.onDataCallback?.(data));
+
   }
 
   setCallbacks(callbacks: {
@@ -187,6 +184,7 @@ export class DeviceConnectionHandler implements IDeviceConnectionHandler {
     );
   }
 }
+
 export interface TuyaDeviceOptions {
   ip?: string;
   port?: number;

@@ -1,7 +1,6 @@
-import * as fs from 'fs';
-import { Logger } from '@nestjs/common';
-import { DeviceConfig, DpsData } from '../types';
-import { IDeviceStateHandler } from '../interfaces/device-handler.interface';
+import {Logger} from '@nestjs/common';
+import {DeviceConfig, DpsData, TuyaEvent} from '../types';
+import {IDeviceStateHandler} from '../interfaces/device-handler.interface';
 
 const debug = require('debug')('tuya-mqtt:state');
 const debugError = require('debug')('tuya-mqtt:error');
@@ -38,7 +37,7 @@ export class DeviceStateHandler implements IDeviceStateHandler {
     }
   }
 
-  updateState(data: any): void {
+  updateState(data: TuyaEvent): void {
     const updatedKeys: string[] = [];
     debug('updateState() for device ' + this.config.id);
 
@@ -72,12 +71,9 @@ export class DeviceStateHandler implements IDeviceStateHandler {
       }
 
       debug('Updated keys:', updatedKeys);
-      debug('Final this.dps state:', JSON.stringify(this.dps));
 
       if (updatedKeys.length > 0) {
-        if (this.config.persist) {
-          this.saveState();
-        }
+        this.saveState();
         debug('Calling onStateUpdatedCallback with keys:', updatedKeys);
         this.onStateUpdatedCallback?.(updatedKeys);
       } else {
@@ -100,63 +96,46 @@ export class DeviceStateHandler implements IDeviceStateHandler {
   }
 
   restoreState(): void {
-    if (this.config.persist) {
-      debug('Restoring saved state for device ' + this.config.id);
-      try {
-        const dpsData = fs.readFileSync('./persist/' + this.config.id, 'utf8');
-        this.dps = JSON.parse(dpsData);
-        debug('Restored state for device ' + this.config.id);
-        debug(dpsData);
-
-        for (const key of Object.keys(this.dps)) {
-          this.dps[key].updated = true;
-        }
-      } catch (e) {
-        debugError('Error restoring persist data:');
-        debugError(e);
-      }
-    }
+    // if (this.config.persist) {
+    //   debug('Restoring saved state for device ' + this.config.id);
+    //   try {
+    //     const dpsData = fs.readFileSync('./persist/' + this.config.id, 'utf8');
+    //     this.dps = JSON.parse(dpsData);
+    //     debug('Restored state for device ' + this.config.id);
+    //     debug(dpsData);
+    //
+    //     for (const key of Object.keys(this.dps)) {
+    //       this.dps[key].updated = true;
+    //     }
+    //   } catch (e) {
+    //     debugError('Error restoring persist data:');
+    //     debugError(e);
+    //   }
+    // }
   }
 
   saveState(): void {
-    debug('Saving persist data for device ' + this.config.id);
-    const data = JSON.stringify(this.dps);
-
-    if (!fs.existsSync('./persist')) {
-      fs.mkdir('./persist', (error) => {
-        if (error) {
-          debugError('Error creating persist directory:' + error);
-          return;
-        }
-      });
-    }
-
-    fs.writeFile('./persist/' + this.config.id, data, (error) => {
-      if (error) {
-        debugError('Error saving persist file: ' + error);
-      } else {
-        debug('Persist data saved');
-      }
-    });
-  }
-
-  markAsPublished(key: string): void {
-    if (this.dps[key]) {
-      this.dps[key].updated = false;
-    }
-  }
-
-  markAllAsPublished(): void {
-    for (const key in this.dps) {
-      this.dps[key].updated = false;
-    }
-  }
-
-  hasUpdates(): boolean {
-    return Object.values(this.dps).some((dpsData) => dpsData.updated);
-  }
-
-  getUpdatedKeys(): string[] {
-    return Object.keys(this.dps).filter((key) => this.dps[key].updated);
+    // if (this.config.persist) {
+    //
+    //   debug('Saving persist data for device ' + this.config.id);
+    //   const data = JSON.stringify(this.dps);
+    //
+    //   if (!fs.existsSync('./persist')) {
+    //     fs.mkdir('./persist', (error) => {
+    //       if (error) {
+    //         debugError('Error creating persist directory:' + error);
+    //         return;
+    //       }
+    //     });
+    //   }
+    //
+    //   fs.writeFile('./persist/' + this.config.id, data, (error) => {
+    //     if (error) {
+    //       debugError('Error saving persist file: ' + error);
+    //     } else {
+    //       debug('Persist data saved');
+    //     }
+    //   });
+    // }
   }
 }

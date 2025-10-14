@@ -1,10 +1,8 @@
 import { Utils } from './utils';
-import { DeviceConfig, TuyaCommand, DeviceData, SubDevice } from './types';
+import {DeviceConfig, TuyaCommand, SubDevice, TuyaEvent} from './types';
 import {DeviceConnectionHandler, TuyaDeviceOptions} from './handlers/device-connection.handler';
 import { DeviceStateHandler } from './handlers/device-state.handler';
 import { EventEmitter2 } from '@nestjs/event-emitter';
-import { HomeAssistantService } from '../homeassistant/homeassistant.service';
-import { HomeAssistantDeviceInfo } from '../homeassistant/homeassistant.types';
 import {
   BaseDeviceDriver,
   DeviceDriverCallbacks,
@@ -20,14 +18,12 @@ export class TuyaDevice {
   private readonly logger = new Logger('TuyaDevice');
 
   protected options: TuyaDeviceOptions;
-  protected deviceData: DeviceData;
   protected subDevices: Record<string, SubDevice> = {};
 
   // Handlers
-  private connectionHandler: DeviceConnectionHandler;
-  private stateHandler: DeviceStateHandler;
-  private deviceDriver: BaseDeviceDriver;
-
+  private readonly connectionHandler: DeviceConnectionHandler;
+  private readonly stateHandler: DeviceStateHandler;
+  private readonly deviceDriver: BaseDeviceDriver;
 
 
   // Callbacks for external integration
@@ -41,19 +37,20 @@ export class TuyaDevice {
   constructor(
       protected readonly config: DeviceConfig,
       private readonly eventEmitter: EventEmitter2,
-      private readonly _baseRoute: string,
-      private readonly homeAssistantService?: HomeAssistantService,
   ) {
 
     this.buildDeviceOptions();
-    this.setupDeviceData();
-    this.initializeDeviceDriver();
-    this.initializeHandlers();
+
+    this.deviceDriver = DeviceDriverFactory.createDriver(this.config, this.initializeDeviceDriver());
+    this.stateHandler = new DeviceStateHandler(this.config);
+    this.connectionHandler = new DeviceConnectionHandler(this.config, this.options);
+
+    this.setupHandlerCallbacks();
   }
 
-  private initializeDeviceDriver(): void {
+  private initializeDeviceDriver(): DeviceDriverCallbacks {
     // Create callbacks for a driver to communicate with TuyaDevice
-    const driverCallbacks: DeviceDriverCallbacks = {
+    return {
       publishMessage: (route: string, message: string, retain?: boolean) => {
         this.eventEmitter.emit('message.publish', {
           route,
@@ -67,14 +64,6 @@ export class TuyaDevice {
       },
     };
 
-    // Try to create a device-specific driver
-    this.deviceDriver = DeviceDriverFactory.createDriver(
-      this.config,
-      this._baseRoute,
-      this.getHomeAssistantDeviceInfo(),
-      driverCallbacks,
-      this.homeAssistantService,
-    );
   }
 
   private buildDeviceOptions(): void {
@@ -82,7 +71,7 @@ export class TuyaDevice {
       id: this.config.id,
       key: this.config.key,
       // Use issueGetOnConnect instead of issueRefreshOnConnect for better compatibility
-      issueGetOnConnect: this.config.issueRefreshOnConnect !== false,
+      issueGetOnConnect: false,
       issueRefreshOnConnect: false,
     };
 
@@ -94,38 +83,6 @@ export class TuyaDevice {
       this.options.ip = this.config.ip;
       this.options.version = this.config.version || '3.1';
     }
-  }
-
-  private setupDeviceData(): void {
-    // Set default device data for Home Assistant
-    this.deviceData = {
-      ids: [this.config.id],
-      name: this.config.name || this.config.id,
-      mf: 'Tuya',
-      via_device: 'tuya-local',
-    };
-  }
-
-  private getHomeAssistantDeviceInfo(): HomeAssistantDeviceInfo {
-    return {
-      identifiers: [this.config.id],
-      name: this.config.name || this.config.id,
-      manufacturer: 'Tuya',
-      via_device: 'tuya-local',
-    };
-  }
-
-  private initializeHandlers(): void {
-    // Initialize state handler
-    this.stateHandler = new DeviceStateHandler(this.config);
-
-    // Initialize connection handler
-    this.connectionHandler = new DeviceConnectionHandler(
-      this.config,
-      this.options,
-    );
-
-    this.setupHandlerCallbacks();
   }
 
   private setupHandlerCallbacks(): void {
@@ -161,16 +118,16 @@ export class TuyaDevice {
 
   private publishStateUpdate(updatedKeys: string[]): void {
     // Publish individual DPS updates to message bus (only when no driver handles them)
-    for (const key of updatedKeys) {
-      const value = this.getDpsValue(key);
-      const route = `${this._baseRoute}dps/${key}`;
-
-      this.eventEmitter.emit('message.publish', {
-        route,
-        message: JSON.stringify(value),
-        retain: true,
-      });
-    }
+    // for (const key of updatedKeys) {
+    //   const value = this.getDpsValue(key);
+    //   const route = `${this._baseRoute}dps/${key}`;
+    //
+    //   this.eventEmitter.emit('message.publish', {
+    //     route,
+    //     message: JSON.stringify(value),
+    //     retain: true,
+    //   });
+    // }
   }
 
   async onConnected(): Promise<void> {
@@ -213,15 +170,15 @@ export class TuyaDevice {
   }
 
   private publishDeviceStatus(status: 'online' | 'offline'): void {
-    const route = `${this._baseRoute}status`;
-
-    this.eventEmitter.emit('message.publish', {
-      route,
-      message: status,
-      retain: true,
-    });
-
-    debug(`Published device status: ${status} to ${route}`);
+    // const route = `${this._baseRoute}status`;
+    //
+    // this.eventEmitter.emit('message.publish', {
+    //   route,
+    //   message: status,
+    //   retain: true,
+    // });
+    //
+    // debug(`Published device status: ${status} to ${route}`);
   }
 
   private onError(error: Error): void {
@@ -244,7 +201,7 @@ export class TuyaDevice {
     }
   }
 
-  onData(data: any): void {
+  onData(data: TuyaEvent): void {
     if (typeof data === 'object') {
       // if the data contains cid then pass it to subdevice
       if (data.cid) {
@@ -330,10 +287,6 @@ export class TuyaDevice {
     return this.connectionHandler.isConnected();
   }
 
-  // Backward compatibility alias
-  get baseMqttTopic(): string {
-    return this._baseRoute;
-  }
 
   getDeviceDriver(): BaseDeviceDriver | null {
     return this.deviceDriver;
