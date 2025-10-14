@@ -1,0 +1,26 @@
+{
+  "result": {
+    "active_time": 1701906862,
+    "category": "pir",
+    "create_time": 1700190394,
+    "custom_name": "",
+    "icon": "smart/icon/ay1537847617560vAgbw/9e1a10300f742875eb5b6b9b6c7ca636.jpg",
+    "id": "eb69265ebb5cec90f4ilqa",
+    "ip": "186.143.133.149",
+    "is_online": true,
+    "lat": "-34.6200",
+    "local_key": "{}gBU=:ZCBvhBz?'",
+    "lon": "-58.4000",
+    "model": "HW400B",
+    "name": "sensor de movimiento humano",
+    "product_id": "gaczanu8noooebfe",
+    "product_name": "人体运动传感器",
+    "sub": false,
+    "time_zone": "-03:00",
+    "update_time": 1701906862,
+    "uuid": "1549a772b7020499"
+  },
+  "success": true,
+  "t": 1701909054241,
+  "tid": "e1a1d772949711eea9175692ba35e69d"
+}

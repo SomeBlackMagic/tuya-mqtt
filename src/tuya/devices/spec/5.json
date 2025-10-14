@@ -1,0 +1,69 @@
+[
+  {
+    "active_time": 1686981690,
+    "biz_type": 0,
+    "category": "pir",
+    "create_time": 1686981690,
+    "icon": "smart/icon/ay15554925906369PM9S/131d393c8aa546206ffcf603f38ceb54.png",
+    "id": "eb29412a460a068676g8cv",
+    "ip": "98.41.236.33",
+    "lat": "37.7200",
+    "local_key": "~M0kO};;9R$d'wqL",
+    "lon": "-121.4700",
+    "model": "PIR-wifi-V01",
+    "name": "PIR",
+    "online": false,
+    "owner_id": "33161067",
+    "product_id": "o1l76njefmksbgkk",
+    "product_name": "PIR",
+    "status": [
+      {
+        "code": "pir",
+        "value": "none"
+      },
+      {
+        "code": "battery_percentage",
+        "value": 100
+      }
+    ],
+    "sub": false,
+    "time_zone": "-07:00",
+    "uid": "az1610958067414WkfOO",
+    "update_time": 1687288443,
+    "uuid": "8390601eff14128c"
+  },
+
+  {
+    "active_time": 1688118544,
+    "biz_type": 0,
+    "category": "pir",
+    "create_time": 1688118544,
+    "icon": "smart/icon/ay1524194438166Zg2hZ/162545442419b6b47e132.jpg",
+    "id": "eb5e5f786fffbf04b9ldxl",
+    "ip": "98.41.236.33",
+    "lat": "37.7200",
+    "local_key": ")pV=i/M$Xz>bFHEN",
+    "lon": "-121.4700",
+    "model": "",
+    "name": "PIR Master",
+    "online": true,
+    "owner_id": "33161067",
+    "product_id": "tuadvwloutnzat2p",
+    "product_name": "PIR Sensor ",
+    "status": [
+      {
+        "code": "pir",
+        "value": "none"
+      },
+      {
+        "code": "battery_percentage",
+        "value": 100
+      }
+    ],
+    "sub": false,
+    "time_zone": "-07:00",
+    "uid": "az1610958067414WkfOO",
+    "update_time": 1688118945,
+    "uuid": "7c864f922baac602"
+  }
+]

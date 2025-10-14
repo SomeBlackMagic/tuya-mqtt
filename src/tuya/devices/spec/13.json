@@ -1,0 +1,45 @@
+{
+  "active_time": 1623229189,
+  "biz_type": 18,
+  "category": "cz",
+  "create_time": 1560491945,
+  "icon": "smart/product_icon/cz.png",
+  "id": "xxxxxxxxxxxxxxxx",
+  "ip": "xxxxxxxxxxxxxxxx",
+  "lat": "30.30286857361191",
+  "local_key": "xxxxxxxxxxxxx",
+  "lon": "120.0639743842656",
+  "model": "",
+  "name": "Living Room Socket",
+  "online": false,
+  "owner_id": "34794909",
+  "product_id": "yfemiswbgjhddhcf",
+  "product_name": "Switch Product",
+  "status": [
+    {
+      "code": "switch",
+      "value": false
+    },
+    {
+      "code": "countdown_1",
+      "value": 0
+    },
+    {
+      "code": "cur_current",
+      "value": 0
+    },
+    {
+      "code": "cur_power",
+      "value": 0
+    },
+    {
+      "code": "cur_voltage",
+      "value": 2343
+    }
+  ],
+  "sub": false,
+  "time_zone": "+08:00",
+  "uid": "ay1622097934070h5Mpi",
+  "update_time": 1625101929,
+  "uuid": "65015854bcddc21a9073"
+}

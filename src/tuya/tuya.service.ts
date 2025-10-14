@@ -4,7 +4,8 @@ import { EventEmitter2 } from '@nestjs/event-emitter';
 import { TuyaConfigProvider } from './config/tuya-config.provider';
 import { BridgeConfigProvider } from './bridge/config/bridge-config.provider';
 import { HomeAssistantService } from '../homeassistant/homeassistant.service';
-import { TuyaDevice } from './localApi/tuya-device';
+import { TuyaDevice } from './lan/tuya-device';
+import {DeviceDriverFactory} from "./devices/device-driver.factory";
 
 const debug = require('debug')('tuya-mqtt:tuyaservice');
 
@@ -150,13 +151,5 @@ export class TuyaService implements OnModuleInit {
 
   getBaseTopic(): string {
     return this.config.topic;
-  }
-
-  getBridgeId(): string {
-    return this.config.bridgeId;
-  }
-
-  getHomeAssistantService(): HomeAssistantService {
-    return this.homeAssistantService;
   }
 }

@@ -1,0 +1,73 @@
+{
+  "active_time": 1610958307,
+  "biz_type": 0,
+  "category": "dj",
+  "create_time": 1610825045,
+  "icon": "smart/icon/ay1526363067472WHq8d/b354bef20490dfd22c5a3d4c89b6269c.png",
+  "id": "ebfc16d57ed374932cjqfk",
+  "ip": "98.41.236.33",
+  "lat": "37.7182",
+  "local_key": "805217605357161b",
+  "lon": "-121.4700",
+  "model": "SL10",
+  "name": "LED Office",
+  "online": true,
+  "owner_id": "33161067",
+  "product_id": "vcbxdeohrcq4tcpq",
+  "product_name": "Smart Bulb-SL10",
+  "status": [
+    {
+      "code": "switch_led",
+      "value": true
+    },
+    {
+      "code": "work_mode",
+      "value": "colour"
+    },
+    {
+      "code": "bright_value_v2",
+      "value": 1000
+    },
+    {
+      "code": "temp_value_v2",
+      "value": 120
+    },
+    {
+      "code": "colour_data_v2",
+      "value": "{\"h\":240,\"s\":1000,\"v\":196}"
+    },
+    {
+      "code": "scene_data_v2",
+      "value": "{\"scene_num\":2,\"scene_units\":[{\"bright\":100,\"h\":0,\"s\":0,\"temperature\":1000,\"unit_change_mode\":\"static\",\"unit_gradient_duration\":13,\"unit_switch_duration\":14,\"v\":0}]}"
+    },
+    {
+      "code": "countdown_1",
+      "value": 0
+    },
+    {
+      "code": "music_data",
+      "value": ""
+    },
+    {
+      "code": "control_data",
+      "value": ""
+    },
+    {
+      "code": "rhythm_mode",
+      "value": "AAAAAAA="
+    },
+    {
+      "code": "sleep_mode",
+      "value": "AAA="
+    },
+    {
+      "code": "wakeup_mode",
+      "value": "AAA="
+    }
+  ],
+  "sub": false,
+  "time_zone": "-08:00",
+  "uid": "az1610958067414WkfOO",
+  "update_time": 1687949619,
+  "uuid": "8d46651d2af2bb95"
+},

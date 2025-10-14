@@ -1,0 +1,633 @@
+{
+  "result": [
+    {
+      "active_time": 1697421169,
+      "biz_type": 18,
+      "category": "dj",
+      "create_time": 1669582635,
+      "icon": "smart/icon/ay15662610937901xhyg/bd77e0da12a0586a996f497aaa3a22f5.png",
+      "id": "eb756cb9037c5a2000hjvn",
+      "ip": "184.190.148.15",
+      "lat": "33.4300",
+      "local_key": "b3azO$5|x_I+ioE:",
+      "lon": "-111.7400",
+      "model": "",
+      "name": " novo3",
+      "online": false,
+      "owner_id": "24463187",
+      "product_id": "jph1bkklotfovejk",
+      "product_name": "Smart Floodlight",
+      "status": [
+        {
+          "code": "switch_led",
+          "value": true
+        },
+        {
+          "code": "work_mode",
+          "value": "colour"
+        },
+        {
+          "code": "colour_data_v2",
+          "value": "{\"h\":13,\"s\":1000,\"v\":1000}"
+        },
+        {
+          "code": "scene_data_v2",
+          "value": "{\"scene_num\":1,\"scene_units\":[{\"bright\":0,\"h\":46,\"s\":1000,\"temperature\":0,\"unit_change_mode\":\"static\",\"unit_gradient_duration\":13,\"unit_switch_duration\":14,\"v\":716}]}"
+        },
+        {
+          "code": "countdown_1",
+          "value": 0
+        },
+        {
+          "code": "music_data",
+          "value": ""
+        },
+        {
+          "code": "control_data",
+          "value": ""
+        },
+        {
+          "code": "sleep_mode",
+          "value": "AAA="
+        },
+        {
+          "code": "wakeup_mode",
+          "value": "AAA="
+        },
+        {
+          "code": "power_memory",
+          "value": "AAEADQPoA+gAAAAA"
+        },
+        {
+          "code": "do_not_disturb",
+          "value": false
+        }
+      ],
+      "sub": false,
+      "time_zone": "-07:00",
+      "uid": "az1602822182969GCJTc",
+      "update_time": 1697434081,
+      "uuid": "23de247ccc63e4d3"
+    },
+    {
+      "active_time": 1669582815,
+      "biz_type": 18,
+      "category": "dj",
+      "create_time": 1669582815,
+      "icon": "smart/icon/ay15662610937901xhyg/bd77e0da12a0586a996f497aaa3a22f5.png",
+      "id": "eba1533ef565e1dcdacw8o",
+      "ip": "174.73.194.25",
+      "lat": "33.4340",
+      "local_key": "177514a513ba9368",
+      "lon": "-111.7410",
+      "model": "",
+      "name": "novo4",
+      "online": true,
+      "owner_id": "24463187",
+      "product_id": "jph1bkklotfovejk",
+      "product_name": "Smart Floodlight",
+      "status": [
+        {
+          "code": "switch_led",
+          "value": true
+        },
+        {
+          "code": "work_mode",
+          "value": "colour"
+        },
+        {
+          "code": "colour_data_v2",
+          "value": "{\"h\":262,\"s\":1000,\"v\":502}"
+        },
+        {
+          "code": "scene_data_v2",
+          "value": "{\"scene_num\":1,\"scene_units\":[{\"bright\":0,\"h\":46,\"s\":1000,\"temperature\":0,\"unit_change_mode\":\"static\",\"unit_gradient_duration\":13,\"unit_switch_duration\":14,\"v\":716}]}"
+        },
+        {
+          "code": "countdown_1",
+          "value": 0
+        },
+        {
+          "code": "music_data",
+          "value": ""
+        },
+        {
+          "code": "control_data",
+          "value": ""
+        },
+        {
+          "code": "sleep_mode",
+          "value": "AAA="
+        },
+        {
+          "code": "wakeup_mode",
+          "value": "AAA="
+        },
+        {
+          "code": "power_memory",
+          "value": "AAEBBgPoAfYAAAAA"
+        },
+        {
+          "code": "do_not_disturb",
+          "value": false
+        }
+      ],
+      "sub": false,
+      "time_zone": "-07:00",
+      "uid": "az1602822182969GCJTc",
+      "update_time": 1697434006,
+      "uuid": "506984fbeab98afd"
+    },
+    {
+      "active_time": 1697341561,
+      "biz_type": 18,
+      "category": "dd",
+      "create_time": 1697341561,
+      "icon": "smart/icon/ay15662610937901xhyg/a12670a9b12ea565b8b762f4445474b4.jpg",
+      "id": "eb625e1314eeb4042felbq",
+      "ip": "184.190.148.15",
+      "lat": "33.4300",
+      "local_key": "DOvj./8-L:PydTb;",
+      "lon": "-111.7400",
+      "model": "Bloom2",
+      "name": "novo10",
+      "online": true,
+      "owner_id": "24463187",
+      "product_id": "aj1e2vrpy87rdy7t",
+      "product_name": "Smart Floodlight",
+      "status": [
+        {
+          "code": "switch_led",
+          "value": true
+        },
+        {
+          "code": "work_mode",
+          "value": "colour"
+        },
+        {
+          "code": "bright_value",
+          "value": 1000
+        },
+        {
+          "code": "temp_value",
+          "value": 1000
+        },
+        {
+          "code": "colour_data",
+          "value": "{\"h\":31,\"s\":1000,\"v\":1000}"
+        },
+        {
+          "code": "scene_data",
+          "value": "{\"scene_num\":1,\"scene_units\":[{\"bright\":200,\"h\":0,\"s\":0,\"temperature\":0,\"unit_change_mode\":\"static\",\"unit_gradient_duration\":13,\"unit_switch_duration\":14,\"v\":0}]}"
+        },
+        {
+          "code": "countdown",
+          "value": 0
+        }
+      ],
+      "sub": false,
+      "time_zone": "-07:00",
+      "uid": "az1602822182969GCJTc",
+      "update_time": 1697433892,
+      "uuid": "afc18314b880aa3c"
+    },
+    {
+      "active_time": 1606713998,
+      "biz_type": 18,
+      "category": "dj",
+      "create_time": 1602823278,
+      "icon": "smart/program_category_icon/dj.png",
+      "id": "56238886c82b960ddccc",
+      "ip": "70.162.97.127",
+      "lat": "33.4338",
+      "local_key": "7fae221116985a14",
+      "lon": "-111.7410",
+      "model": "YL.DY.0629",
+      "name": "novo2",
+      "online": true,
+      "owner_id": "24463187",
+      "product_id": "jzkpltrhwqyzoc33",
+      "product_name": "Smart light ",
+      "status": [
+        {
+          "code": "switch_led",
+          "value": true
+        },
+        {
+          "code": "work_mode",
+          "value": "colour"
+        },
+        {
+          "code": "bright_value_v2",
+          "value": 1000
+        },
+        {
+          "code": "temp_value_v2",
+          "value": 408
+        },
+        {
+          "code": "colour_data_v2",
+          "value": "{\"h\":253,\"s\":1000,\"v\":1000}"
+        },
+        {
+          "code": "scene_data_v2",
+          "value": "{\"scene_num\":1,\"scene_units\":[{\"bright\":0,\"h\":252,\"s\":1000,\"temperature\":0,\"unit_change_mode\":\"static\",\"unit_gradient_duration\":13,\"unit_switch_duration\":13,\"v\":716}]}"
+        },
+        {
+          "code": "countdown_1",
+          "value": 0
+        },
+        {
+          "code": "control_data",
+          "value": ""
+        }
+      ],
+      "sub": false,
+      "time_zone": "-07:00",
+      "uid": "az1602822182969GCJTc",
+      "update_time": 1697421462,
+      "uuid": "56238886c82b960ddccc"
+    },
+    {
+      "active_time": 1652851983,
+      "biz_type": 18,
+      "category": "dj",
+      "create_time": 1604637516,
+      "icon": "smart/program_category_icon/dj.png",
+      "id": "56238886c82b960de1bc",
+      "ip": "174.73.194.25",
+      "lat": "33.4339",
+      "local_key": "90b4d4cb3594500f",
+      "lon": "-111.7411",
+      "model": "YL.DY.0629",
+      "name": "novo1",
+      "online": true,
+      "owner_id": "24463187",
+      "product_id": "jzkpltrhwqyzoc33",
+      "product_name": "Smart light ",
+      "status": [
+        {
+          "code": "switch_led",
+          "value": true
+        },
+        {
+          "code": "work_mode",
+          "value": "colour"
+        },
+        {
+          "code": "bright_value_v2",
+          "value": 1000
+        },
+        {
+          "code": "temp_value_v2",
+          "value": 362
+        },
+        {
+          "code": "colour_data_v2",
+          "value": "{\"h\":252,\"s\":1000,\"v\":1000}"
+        },
+        {
+          "code": "scene_data_v2",
+          "value": "{\"scene_num\":1,\"scene_units\":[{\"bright\":0,\"h\":46,\"s\":1000,\"temperature\":0,\"unit_change_mode\":\"static\",\"unit_gradient_duration\":13,\"unit_switch_duration\":14,\"v\":716}]}"
+        },
+        {
+          "code": "countdown_1",
+          "value": 0
+        },
+        {
+          "code": "control_data",
+          "value": ""
+        }
+      ],
+      "sub": false,
+      "time_zone": "-07:00",
+      "uid": "az1602822182969GCJTc",
+      "update_time": 1697420861,
+      "uuid": "56238886c82b960de1bc"
+    },
+    {
+      "active_time": 1697341586,
+      "biz_type": 18,
+      "category": "dd",
+      "create_time": 1697341586,
+      "icon": "smart/icon/ay15662610937901xhyg/a12670a9b12ea565b8b762f4445474b4.jpg",
+      "id": "eb22da3575ff0eaf25imab",
+      "ip": "184.190.148.15",
+      "lat": "33.4300",
+      "local_key": "fKp~udfNAzy$=(~9",
+      "lon": "-111.7400",
+      "model": "Bloom2",
+      "name": "novo8",
+      "online": true,
+      "owner_id": "24463187",
+      "product_id": "aj1e2vrpy87rdy7t",
+      "product_name": "Smart Floodlight",
+      "status": [
+        {
+          "code": "switch_led",
+          "value": true
+        },
+        {
+          "code": "work_mode",
+          "value": "colour"
+        },
+        {
+          "code": "bright_value",
+          "value": 1000
+        },
+        {
+          "code": "temp_value",
+          "value": 1000
+        },
+        {
+          "code": "colour_data",
+          "value": "{\"h\":31,\"s\":1000,\"v\":1000}"
+        },
+        {
+          "code": "scene_data",
+          "value": "{\"scene_num\":1,\"scene_units\":[{\"bright\":200,\"h\":0,\"s\":0,\"temperature\":0,\"unit_change_mode\":\"static\",\"unit_gradient_duration\":13,\"unit_switch_duration\":14,\"v\":0}]}"
+        },
+        {
+          "code": "countdown",
+          "value": 0
+        }
+      ],
+      "sub": false,
+      "time_zone": "-07:00",
+      "uid": "az1602822182969GCJTc",
+      "update_time": 1697420707,
+      "uuid": "04a82a794366db31"
+    },
+    {
+      "active_time": 1669584292,
+      "biz_type": 18,
+      "category": "dj",
+      "create_time": 1669584292,
+      "icon": "smart/icon/ay15662610937901xhyg/bd77e0da12a0586a996f497aaa3a22f5.png",
+      "id": "ebb5c93bf765faa9aefs9k",
+      "ip": "174.73.194.25",
+      "lat": "33.4340",
+      "local_key": "43fc8e3c9bc8a938",
+      "lon": "-111.7410",
+      "model": "",
+      "name": "novo6",
+      "online": true,
+      "owner_id": "24463187",
+      "product_id": "jph1bkklotfovejk",
+      "product_name": "Smart Floodlight",
+      "status": [
+        {
+          "code": "switch_led",
+          "value": true
+        },
+        {
+          "code": "work_mode",
+          "value": "colour"
+        },
+        {
+          "code": "colour_data_v2",
+          "value": "{\"h\":264,\"s\":1000,\"v\":1000}"
+        },
+        {
+          "code": "scene_data_v2",
+          "value": "{\"scene_num\":1,\"scene_units\":[{\"bright\":0,\"h\":46,\"s\":1000,\"temperature\":0,\"unit_change_mode\":\"static\",\"unit_gradient_duration\":13,\"unit_switch_duration\":14,\"v\":716}]}"
+        },
+        {
+          "code": "countdown_1",
+          "value": 0
+        },
+        {
+          "code": "music_data",
+          "value": ""
+        },
+        {
+          "code": "control_data",
+          "value": ""
+        },
+        {
+          "code": "sleep_mode",
+          "value": "AAA="
+        },
+        {
+          "code": "wakeup_mode",
+          "value": "AAA="
+        },
+        {
+          "code": "power_memory",
+          "value": "AAEBCAPoA+gAAAAA"
+        },
+        {
+          "code": "do_not_disturb",
+          "value": false
+        }
+      ],
+      "sub": false,
+      "time_zone": "-07:00",
+      "uid": "az1602822182969GCJTc",
+      "update_time": 1697420584,
+      "uuid": "e644a57634a4839c"
+    },
+    {
+      "active_time": 1697341652,
+      "biz_type": 18,
+      "category": "dd",
+      "create_time": 1697341652,
+      "icon": "smart/icon/ay15662610937901xhyg/a12670a9b12ea565b8b762f4445474b4.jpg",
+      "id": "eb5601bf0990c7d40dkx13",
+      "ip": "184.190.148.15",
+      "lat": "33.4300",
+      "local_key": "VQZw[.giq6h83M6Y",
+      "lon": "-111.7400",
+      "model": "Bloom2",
+      "name": "novo7",
+      "online": true,
+      "owner_id": "24463187",
+      "product_id": "aj1e2vrpy87rdy7t",
+      "product_name": "Smart Floodlight",
+      "status": [
+        {
+          "code": "switch_led",
+          "value": true
+        },
+        {
+          "code": "work_mode",
+          "value": "colour"
+        },
+        {
+          "code": "bright_value",
+          "value": 1000
+        },
+        {
+          "code": "temp_value",
+          "value": 1000
+        },
+        {
+          "code": "colour_data",
+          "value": "{\"h\":33,\"s\":1000,\"v\":1000}"
+        },
+        {
+          "code": "scene_data",
+          "value": "{\"scene_num\":1,\"scene_units\":[{\"bright\":200,\"h\":0,\"s\":0,\"temperature\":0,\"unit_change_mode\":\"static\",\"unit_gradient_duration\":13,\"unit_switch_duration\":14,\"v\":0}]}"
+        },
+        {
+          "code": "countdown",
+          "value": 0
+        }
+      ],
+      "sub": false,
+      "time_zone": "-07:00",
+      "uid": "az1602822182969GCJTc",
+      "update_time": 1697420525,
+      "uuid": "e8554c7ba048b360"
+    },
+    {
+      "active_time": 1697341582,
+      "biz_type": 18,
+      "category": "dd",
+      "create_time": 1697341582,
+      "icon": "smart/icon/ay15662610937901xhyg/a12670a9b12ea565b8b762f4445474b4.jpg",
+      "id": "eb69a509dc0b8b63b0c0s2",
+      "ip": "184.190.148.15",
+      "lat": "33.4300",
+      "local_key": "3W.KX:Oe5ak]){r:",
+      "lon": "-111.7400",
+      "model": "Bloom2",
+      "name": "novo9",
+      "online": true,
+      "owner_id": "24463187",
+      "product_id": "aj1e2vrpy87rdy7t",
+      "product_name": "Smart Floodlight",
+      "status": [
+        {
+          "code": "switch_led",
+          "value": true
+        },
+        {
+          "code": "work_mode",
+          "value": "colour"
+        },
+        {
+          "code": "bright_value",
+          "value": 1000
+        },
+        {
+          "code": "temp_value",
+          "value": 1000
+        },
+        {
+          "code": "colour_data",
+          "value": "{\"h\":25,\"s\":1000,\"v\":1000}"
+        },
+        {
+          "code": "scene_data",
+          "value": "{\"scene_num\":1,\"scene_units\":[{\"bright\":200,\"h\":0,\"s\":0,\"temperature\":0,\"unit_change_mode\":\"static\",\"unit_gradient_duration\":13,\"unit_switch_duration\":14,\"v\":0}]}"
+        },
+        {
+          "code": "countdown",
+          "value": 0
+        }
+      ],
+      "sub": false,
+      "time_zone": "-07:00",
+      "uid": "az1602822182969GCJTc",
+      "update_time": 1697348960,
+      "uuid": "20bb0dddb8494a9a"
+    },
+    {
+      "active_time": 1669583733,
+      "biz_type": 18,
+      "category": "dj",
+      "create_time": 1669583733,
+      "icon": "smart/icon/ay15662610937901xhyg/bd77e0da12a0586a996f497aaa3a22f5.png",
+      "id": "eb36ebd11d14087d32aarb",
+      "ip": "174.73.194.25",
+      "lat": "33.4340",
+      "local_key": "cd7e25e603a00be5",
+      "lon": "-111.7410",
+      "model": "",
+      "name": "novo5",
+      "online": false,
+      "owner_id": "24463187",
+      "product_id": "jph1bkklotfovejk",
+      "product_name": "Smart Floodlight",
+      "status": [
+        {
+          "code": "switch_led",
+          "value": false
+        },
+        {
+          "code": "work_mode",
+          "value": "colour"
+        },
+        {
+          "code": "colour_data_v2",
+          "value": "{\"h\":264,\"s\":1000,\"v\":1000}"
+        },
+        {
+          "code": "scene_data_v2",
+          "value": "{\"scene_num\":1,\"scene_units\":[{\"bright\":0,\"h\":46,\"s\":1000,\"temperature\":0,\"unit_change_mode\":\"static\",\"unit_gradient_duration\":13,\"unit_switch_duration\":14,\"v\":716}]}"
+        },
+        {
+          "code": "countdown_1",
+          "value": 0
+        },
+        {
+          "code": "music_data",
+          "value": ""
+        },
+        {
+          "code": "control_data",
+          "value": ""
+        },
+        {
+          "code": "sleep_mode",
+          "value": "AAA="
+        },
+        {
+          "code": "wakeup_mode",
+          "value": "AAA="
+        },
+        {
+          "code": "power_memory",
+          "value": "AAEAAAPoA+gAAAAA"
+        },
+        {
+          "code": "do_not_disturb",
+          "value": false
+        }
+      ],
+      "sub": false,
+      "time_zone": "-07:00",
+      "uid": "az1602822182969GCJTc",
+      "update_time": 1669583914,
+      "uuid": "55534483654f04b5"
+    },
+    {
+      "active_time": 1663979859,
+      "biz_type": 18,
+      "category": "wg2",
+      "create_time": 1663979859,
+      "icon": "smart/icon/ay1562830083757AoBrF/c596192983615128277fd171653a1119.png",
+      "id": "ebc283e7c3efefa355aomi",
+      "ip": "174.73.194.25",
+      "lat": "33.4339",
+      "local_key": "39861fd230d27c40",
+      "lon": "-111.7411",
+      "model": "\u82af\u8fbe\u901a\uff0cCR3L\u6a21\u7ec4",
+      "name": "Wireless Bluetooth gateway",
+      "online": false,
+      "owner_id": "24463187",
+      "product_id": "iq9hwd2bjsdgqiby",
+      "product_name": "Wireless Bluetooth gateway",
+      "status": [],
+      "sub": true,
+      "time_zone": "-07:00",
+      "uid": "az1602822182969GCJTc",
+      "update_time": 1663979865,
+      "uuid": "f31cf178f4e368f2"
+    }
+  ],
+  "success": true,
+  "t": 1697434153087,
+  "tid": "f0ad87116be411ee847b16e7c18db4ee"
+}

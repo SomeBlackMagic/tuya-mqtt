@@ -1,0 +1,361 @@
+{
+  "result": [
+    {
+      "active_time": 1697424231,
+      "biz_type": 18,
+      "category": "kg",
+      "create_time": 1697300269,
+      "icon": "smart/icon/ay1525015673758Ghvpg/2587b975a6b0645e83559835ef7c7eef.png",
+      "id": "6863561034ab950040a2",
+      "ip": "174.171.104.62",
+      "lat": "29.6400",
+      "local_key": "2!THEnw7cT|yMM}N",
+      "lon": "-95.2600",
+      "model": "TY-DIY-S04",
+      "name": "WiFi switch-4CH",
+      "online": true,
+      "owner_id": "162929934",
+      "product_id": "waq2wj9pjadcg1qc",
+      "product_name": "WiFi switch-4CH",
+      "status": [
+        {
+          "code": "switch_1",
+          "value": false
+        },
+        {
+          "code": "switch_2",
+          "value": false
+        },
+        {
+          "code": "switch_3",
+          "value": false
+        },
+        {
+          "code": "switch_4",
+          "value": false
+        },
+        {
+          "code": "countdown_1",
+          "value": 0
+        },
+        {
+          "code": "countdown_2",
+          "value": 0
+        },
+        {
+          "code": "countdown_3",
+          "value": 0
+        },
+        {
+          "code": "countdown_4",
+          "value": 0
+        },
+        {
+          "code": "switch",
+          "value": false
+        }
+      ],
+      "sub": false,
+      "time_zone": "-06:00",
+      "uid": "az1690045026587t2pFy",
+      "update_time": 1697889225,
+      "uuid": "6863561034ab950040a2"
+    },
+    {
+      "active_time": 1697424889,
+      "biz_type": 18,
+      "category": "kg",
+      "create_time": 1693065827,
+      "icon": "smart/icon/ay1541487337020lAqrO/1b30ea7805019c72fc4e8c08c22e7a45.jpg",
+      "id": "ebd1f2c4bd0c487661tzyw",
+      "ip": "174.171.104.62",
+      "lat": "29.6400",
+      "local_key": "u6l5{(U'eci75'1=",
+      "lon": "-95.2600",
+      "model": "ARD-100+",
+      "name": "Upper Deck",
+      "online": true,
+      "owner_id": "162929934",
+      "product_id": "nguto5atyd2xxnap",
+      "product_name": "Smart valve controller",
+      "status": [
+        {
+          "code": "switch_1",
+          "value": false
+        },
+        {
+          "code": "countdown_1",
+          "value": 0
+        },
+        {
+          "code": "relay_status",
+          "value": "last"
+        }
+      ],
+      "sub": false,
+      "time_zone": "-05:00",
+      "uid": "az1690045026587t2pFy",
+      "update_time": 1697889222,
+      "uuid": "2237b84939b97d7b"
+    },
+    {
+      "active_time": 1697842326,
+      "biz_type": 18,
+      "category": "kg",
+      "create_time": 1697670829,
+      "icon": "smart/icon/ay1541487337020lAqrO/1b30ea7805019c72fc4e8c08c22e7a45.jpg",
+      "id": "eb491e2918b82dc5d1upqw",
+      "ip": "174.171.104.62",
+      "lat": "29.6400",
+      "local_key": "e|B]AuR;8RzQ`593",
+      "lon": "-95.2600",
+      "model": "ARD-100+",
+      "name": "Smart valve controller 2",
+      "online": true,
+      "owner_id": "162929934",
+      "product_id": "nguto5atyd2xxnap",
+      "product_name": "Smart valve controller",
+      "status": [
+        {
+          "code": "switch_1",
+          "value": false
+        },
+        {
+          "code": "countdown_1",
+          "value": 0
+        },
+        {
+          "code": "relay_status",
+          "value": "power_off"
+        }
+      ],
+      "sub": false,
+      "time_zone": "-05:00",
+      "uid": "az1690045026587t2pFy",
+      "update_time": 1697889220,
+      "uuid": "44ead52c05f83b94"
+    },
+    {
+      "active_time": 1697682061,
+      "biz_type": 18,
+      "category": "tdq",
+      "create_time": 1697682030,
+      "icon": "smart/icon/ay1528249126144ckqum/0a7c9f7d4354429f23549f7be6f9562a.png",
+      "id": "eb94a652398ee3d6f7jx00",
+      "ip": "174.171.104.62",
+      "lat": "29.6400",
+      "local_key": "tSJ1*N=_E{ArTz(6",
+      "lon": "-95.2600",
+      "model": "1-433",
+      "name": "1-433",
+      "online": false,
+      "owner_id": "162929934",
+      "product_id": "ansyev8xo2glpuax",
+      "product_name": "1-433",
+      "status": [
+        {
+          "code": "switch_1",
+          "value": false
+        },
+        {
+          "code": "countdown_1",
+          "value": 0
+        },
+        {
+          "code": "relay_status",
+          "value": "0"
+        },
+        {
+          "code": "random_time",
+          "value": ""
+        },
+        {
+          "code": "cycle_time",
+          "value": ""
+        },
+        {
+          "code": "switch_inching",
+          "value": "AAAC"
+        },
+        {
+          "code": "switch_type",
+          "value": "flip"
+        }
+      ],
+      "sub": false,
+      "time_zone": "-05:00",
+      "uid": "az1690045026587t2pFy",
+      "update_time": 1697842277,
+      "uuid": "761682f93bd3415d"
+    },
+    {
+      "active_time": 1697661657,
+      "biz_type": 18,
+      "category": "kg",
+      "create_time": 1697661657,
+      "icon": "smart/icon/ay1541487337020lAqrO/1b30ea7805019c72fc4e8c08c22e7a45.jpg",
+      "id": "eba9bad5da13b411edq61j",
+      "ip": "50.79.141.17",
+      "lat": "29.6400",
+      "local_key": "94R}+^TlNP~Fv0nk",
+      "lon": "-95.2600",
+      "model": "ARD-100+",
+      "name": "Smart valve controller",
+      "online": false,
+      "owner_id": "172426261",
+      "product_id": "nguto5atyd2xxnap",
+      "product_name": "Smart valve controller",
+      "status": [
+        {
+          "code": "switch_1",
+          "value": true
+        },
+        {
+          "code": "countdown_1",
+          "value": 0
+        },
+        {
+          "code": "relay_status",
+          "value": "power_on"
+        }
+      ],
+      "sub": false,
+      "time_zone": "-05:00",
+      "uid": "az1690045026587t2pFy",
+      "update_time": 1697820111,
+      "uuid": "51573092cc29c38f"
+    },
+    {
+      "active_time": 1697662485,
+      "biz_type": 18,
+      "category": "kg",
+      "create_time": 1697662485,
+      "icon": "smart/icon/ay1541487337020lAqrO/1b30ea7805019c72fc4e8c08c22e7a45.jpg",
+      "id": "ebd8c41ff8b66eef73rosx",
+      "ip": "50.79.141.17",
+      "lat": "29.6400",
+      "local_key": "0O?*z>FHH]JeBW>{",
+      "lon": "-95.2600",
+      "model": "ARD-100+",
+      "name": "Smart valve controller 2",
+      "online": false,
+      "owner_id": "172426261",
+      "product_id": "nguto5atyd2xxnap",
+      "product_name": "Smart valve controller",
+      "status": [
+        {
+          "code": "switch_1",
+          "value": false
+        },
+        {
+          "code": "countdown_1",
+          "value": 0
+        },
+        {
+          "code": "relay_status",
+          "value": "power_on"
+        }
+      ],
+      "sub": false,
+      "time_zone": "-05:00",
+      "uid": "az1690045026587t2pFy",
+      "update_time": 1697751650,
+      "uuid": "4fa8aac4192fa69f"
+    },
+    {
+      "active_time": 1692468064,
+      "biz_type": 18,
+      "category": "wg2",
+      "create_time": 1692468064,
+      "icon": "smart/icon/ay1503986080106Gppjy/1d241ba5f7e7b5139ee6bbf2b0eeb11b.png",
+      "id": "eb6b43f3a6f0593a69trte",
+      "ip": "174.171.104.62",
+      "lat": "29.6400",
+      "local_key": "!y3-m=gjYXUGa&c4",
+      "lon": "-95.2600",
+      "model": "NAS-ZW05B0",
+      "name": "NEO Gateway",
+      "online": true,
+      "owner_id": "162929934",
+      "product_id": "be9fookuobd9w8z3",
+      "product_name": "Zigbee Gateway ",
+      "status": [],
+      "sub": false,
+      "time_zone": "-05:00",
+      "uid": "az1690045026587t2pFy",
+      "update_time": 1697681064,
+      "uuid": "3247cb8f73c4e40b"
+    },
+    {
+      "active_time": 1694891658,
+      "biz_type": 18,
+      "category": "sj",
+      "create_time": 1694890397,
+      "icon": "smart/icon/ay15427647462366edzT/64fb716983297a0df40deae40a719aef.png",
+      "id": "eb16be574a05617e95b3av",
+      "ip": "",
+      "lat": "29.5700",
+      "local_key": "!y3-m=gjYXUGa&c4",
+      "lon": "-95.0500",
+      "model": "\u514d\u5f00\u53d1\u6c34\u6d78\u4f20\u611f\u5668",
+      "name": "Water leak sensor 2",
+      "node_id": "a4c138cb15af5c76",
+      "online": false,
+      "owner_id": "162929934",
+      "product_id": "upgcbody",
+      "product_name": "Water leak sensor",
+      "status": [
+        {
+          "code": "watersensor_state",
+          "value": "normal"
+        },
+        {
+          "code": "battery_percentage",
+          "value": 100
+        }
+      ],
+      "sub": true,
+      "time_zone": "-05:00",
+      "uid": "az1690045026587t2pFy",
+      "update_time": 1694891658,
+      "uuid": "a4c138cb15af5c76"
+    },
+    {
+      "active_time": 1694890492,
+      "biz_type": 18,
+      "category": "sj",
+      "create_time": 1694890492,
+      "icon": "smart/icon/ay15107356719526e3ps/2654ae1eb437c4c87c253a034ab29371.png",
+      "id": "ebbd94d82b9f89f6f5q8s0",
+      "ip": "",
+      "lat": "29.5700",
+      "local_key": "!y3-m=gjYXUGa&c4",
+      "lon": "-95.0500",
+      "model": "",
+      "name": "Water leak sensor",
+      "node_id": "a4c138dd6e707118",
+      "online": false,
+      "owner_id": "162929934",
+      "product_id": "js34cuma",
+      "product_name": "Water leak sensor",
+      "status": [
+        {
+          "code": "watersensor_state",
+          "value": "normal"
+        },
+        {
+          "code": "battery_percentage",
+          "value": 100
+        }
+      ],
+      "sub": true,
+      "time_zone": "-05:00",
+      "uid": "az1690045026587t2pFy",
+      "update_time": 1694890492,
+      "uuid": "a4c138dd6e707118"
+    }
+  ],
+  "success": true,
+  "t": 1697895534702,
+  "tid": "2d8c1d04701711ee88d87e68e426c0a4"
+}

@@ -1,0 +1,526 @@
+{
+  "result": [
+    {
+      "active_time": 1622152956,
+      "biz_type": 18,
+      "category": "cz",
+      "create_time": 1622152956,
+      "icon": "smart/icon/ay1519551146071pEnBd/76676b950ccedb079700525d72fda1f8.png",
+      "id": "4016257070039fcf50f5",
+      "ip": "24.119.254.172",
+      "lat": "34.6092",
+      "local_key": "68a4c3424253b30e",
+      "lon": "-112.3281",
+      "model": "WP3_C\uff0c\u6e29\u5ea6\u4fdd\u62a4\uff0cAI\u63d2\u4ef6",
+      "name": "Palm Backlight",
+      "online": true,
+      "owner_id": "13191265",
+      "product_id": "0g1fmqh6d5io7lcn",
+      "product_name": "Mini Smart Plug",
+      "status": [
+        {
+          "code": "switch_1",
+          "value": false
+        },
+        {
+          "code": "countdown_1",
+          "value": 0
+        }
+      ],
+      "sub": false,
+      "time_zone": "-08:00",
+      "uid": "az1578544170996a3Qu0",
+      "update_time": 1691710260,
+      "uuid": "4016257070039fcf50f5"
+    },
+    {
+      "active_time": 1608009246,
+      "biz_type": 18,
+      "category": "cz",
+      "create_time": 1608009246,
+      "icon": "smart/icon/ay1519551146071pEnBd/76676b950ccedb079700525d72fda1f8.png",
+      "id": "4016257040f520ea8ae5",
+      "ip": "24.119.254.172",
+      "lat": "34.6100",
+      "local_key": "ca51c4a00ab3c2bd",
+      "lon": "-112.3300",
+      "model": "WP3_C\uff0c\u6e29\u5ea6\u4fdd\u62a4\uff0cAI\u63d2\u4ef6",
+      "name": "Hall Bathroom",
+      "online": true,
+      "owner_id": "13191265",
+      "product_id": "0g1fmqh6d5io7lcn",
+      "product_name": "Mini Smart Plug",
+      "status": [
+        {
+          "code": "switch_1",
+          "value": false
+        },
+        {
+          "code": "countdown_1",
+          "value": 0
+        }
+      ],
+      "sub": false,
+      "time_zone": "-08:00",
+      "uid": "az1578544170996a3Qu0",
+      "update_time": 1691710237,
+      "uuid": "4016257040f520ea8ae5"
+    },
+    {
+      "active_time": 1622153108,
+      "biz_type": 18,
+      "category": "cz",
+      "create_time": 1622153108,
+      "icon": "smart/icon/ay1519551146071pEnBd/76676b950ccedb079700525d72fda1f8.png",
+      "id": "1836011424a16002f063",
+      "ip": "24.119.254.172",
+      "lat": "34.6100",
+      "local_key": "063c052594edb0b5",
+      "lon": "-112.3300",
+      "model": "WP3_C\uff0c\u6e29\u5ea6\u4fdd\u62a4\uff0cAI\u63d2\u4ef6",
+      "name": "Dale's Bathroom ",
+      "online": true,
+      "owner_id": "13191265",
+      "product_id": "0g1fmqh6d5io7lcn",
+      "product_name": "Mini Smart Plug",
+      "status": [
+        {
+          "code": "switch_1",
+          "value": false
+        },
+        {
+          "code": "countdown_1",
+          "value": 0
+        }
+      ],
+      "sub": false,
+      "time_zone": "-08:00",
+      "uid": "az1578544170996a3Qu0",
+      "update_time": 1691710191,
+      "uuid": "1836011424a16002f063"
+    },
+    {
+      "active_time": 1613066391,
+      "biz_type": 18,
+      "category": "cz",
+      "create_time": 1613066391,
+      "icon": "smart/icon/ay1519551146071pEnBd/76676b950ccedb079700525d72fda1f8.png",
+      "id": "1836011440f520e9b2ff",
+      "ip": "24.119.254.172",
+      "lat": "34.6100",
+      "local_key": "db57f49e241d8fb5",
+      "lon": "-112.3300",
+      "model": "WP3_C\uff0c\u6e29\u5ea6\u4fdd\u62a4\uff0cAI\u63d2\u4ef6",
+      "name": "Collin's Bathroom",
+      "online": true,
+      "owner_id": "13191265",
+      "product_id": "0g1fmqh6d5io7lcn",
+      "product_name": "Mini Smart Plug",
+      "status": [
+        {
+          "code": "switch_1",
+          "value": false
+        },
+        {
+          "code": "countdown_1",
+          "value": 0
+        }
+      ],
+      "sub": false,
+      "time_zone": "-08:00",
+      "uid": "az1578544170996a3Qu0",
+      "update_time": 1691710121,
+      "uuid": "1836011440f520e9b2ff"
+    },
+    {
+      "active_time": 1691709983,
+      "biz_type": 18,
+      "category": "dj",
+      "create_time": 1691680901,
+      "icon": "smart/icon/ay1526363067472WHq8d/815eee38d3cae9b4b2bc2cabeeed6e2d.png",
+      "id": "ebaa8af13ea09fef3apk0q",
+      "ip": "160.2.197.253",
+      "lat": "34.6100",
+      "local_key": ">|OxB`FEC/K|;<m6",
+      "lon": "-112.3300",
+      "model": "\u5f97\u90a6CW\u5927\u8d27",
+      "name": "Vacation Bulb",
+      "online": true,
+      "owner_id": "13191265",
+      "product_id": "cdy6tbsxmkvgjmyh",
+      "product_name": "Smart Bulb-SL20",
+      "status": [
+        {
+          "code": "switch_led",
+          "value": true
+        },
+        {
+          "code": "work_mode",
+          "value": "white"
+        },
+        {
+          "code": "bright_value_v2",
+          "value": 1000
+        },
+        {
+          "code": "temp_value_v2",
+          "value": 1000
+        },
+        {
+          "code": "scene_data_v2",
+          "value": "{\"scene_num\":1,\"scene_units\":[{\"bright\":200,\"h\":0,\"s\":0,\"temperature\":0,\"unit_change_mode\":\"static\",\"unit_gradient_duration\":13,\"unit_switch_duration\":14,\"v\":0}]}"
+        },
+        {
+          "code": "countdown_1",
+          "value": 0
+        },
+        {
+          "code": "control_data",
+          "value": ""
+        },
+        {
+          "code": "rhythm_mode",
+          "value": "AAAAAAA="
+        },
+        {
+          "code": "sleep_mode",
+          "value": "AAA="
+        },
+        {
+          "code": "wakeup_mode",
+          "value": "AAA="
+        }
+      ],
+      "sub": false,
+      "time_zone": "-07:00",
+      "uid": "az1578544170996a3Qu0",
+      "update_time": 1691710013,
+      "uuid": "6e37734ff3fb0fdc"
+    },
+    {
+      "active_time": 1689471734,
+      "biz_type": 18,
+      "category": "dj",
+      "create_time": 1689471734,
+      "icon": "smart/icon/ay1526363067472WHq8d/815eee38d3cae9b4b2bc2cabeeed6e2d.png",
+      "id": "eb9565237b1918ea2bsm6q",
+      "ip": "160.2.197.253",
+      "lat": "34.6100",
+      "local_key": "+j-!kr.o)h:6G5p`",
+      "lon": "-112.3300",
+      "model": "\u5f97\u90a6CW\u5927\u8d27",
+      "name": "Porch",
+      "online": true,
+      "owner_id": "13191265",
+      "product_id": "cdy6tbsxmkvgjmyh",
+      "product_name": "Smart Bulb-SL20",
+      "status": [
+        {
+          "code": "switch_led",
+          "value": false
+        },
+        {
+          "code": "work_mode",
+          "value": "white"
+        },
+        {
+          "code": "bright_value_v2",
+          "value": 1000
+        },
+        {
+          "code": "temp_value_v2",
+          "value": 44
+        },
+        {
+          "code": "scene_data_v2",
+          "value": "{\"scene_num\":1,\"scene_units\":[{\"bright\":200,\"h\":0,\"s\":0,\"temperature\":0,\"unit_change_mode\":\"static\",\"unit_gradient_duration\":13,\"unit_switch_duration\":14,\"v\":0}]}"
+        },
+        {
+          "code": "countdown_1",
+          "value": 0
+        },
+        {
+          "code": "control_data",
+          "value": ""
+        },
+        {
+          "code": "rhythm_mode",
+          "value": "AAAAAAA="
+        },
+        {
+          "code": "sleep_mode",
+          "value": "AAA="
+        },
+        {
+          "code": "wakeup_mode",
+          "value": "AAA="
+        }
+      ],
+      "sub": false,
+      "time_zone": "-07:00",
+      "uid": "az1578544170996a3Qu0",
+      "update_time": 1691691234,
+      "uuid": "794d0fb42b98d142"
+    },
+    {
+      "active_time": 1678922920,
+      "biz_type": 18,
+      "category": "pc",
+      "create_time": 1678922920,
+      "icon": "smart/icon/15521107103jdx0ojgh9y_0.png",
+      "id": "02742703cc50e3f7acfd",
+      "ip": "160.2.197.253",
+      "lat": "34.6100",
+      "local_key": "08ecfb278346e664",
+      "lon": "-112.3300",
+      "model": "AHR-085",
+      "name": "AHR-085",
+      "online": true,
+      "owner_id": "13191265",
+      "product_id": "pxi0drurxccaahyr",
+      "product_name": "AHR-085",
+      "status": [
+        {
+          "code": "switch_1",
+          "value": false
+        },
+        {
+          "code": "switch_2",
+          "value": false
+        },
+        {
+          "code": "switch_3",
+          "value": false
+        },
+        {
+          "code": "countdown_1",
+          "value": 0
+        },
+        {
+          "code": "countdown_2",
+          "value": 0
+        },
+        {
+          "code": "countdown_3",
+          "value": 0
+        }
+      ],
+      "sub": false,
+      "time_zone": "-07:00",
+      "uid": "az1578544170996a3Qu0",
+      "update_time": 1691691230,
+      "uuid": "02742703cc50e3f7acfd"
+    },
+    {
+      "active_time": 1689472308,
+      "biz_type": 18,
+      "category": "dj",
+      "create_time": 1689472308,
+      "icon": "smart/icon/ay1526363067472WHq8d/815eee38d3cae9b4b2bc2cabeeed6e2d.png",
+      "id": "eba539069d6069afb1xaj1",
+      "ip": "160.2.197.253",
+      "lat": "34.6100",
+      "local_key": "kd^TY8<B3~+OQ*t`",
+      "lon": "-112.3300",
+      "model": "\u5f97\u90a6CW\u5927\u8d27",
+      "name": "10-PF D2",
+      "online": true,
+      "owner_id": "13191265",
+      "product_id": "cdy6tbsxmkvgjmyh",
+      "product_name": "Smart Bulb-SL20",
+      "status": [
+        {
+          "code": "switch_led",
+          "value": false
+        },
+        {
+          "code": "work_mode",
+          "value": "white"
+        },
+        {
+          "code": "bright_value_v2",
+          "value": 50
+        },
+        {
+          "code": "temp_value_v2",
+          "value": 44
+        },
+        {
+          "code": "scene_data_v2",
+          "value": "{\"scene_num\":1,\"scene_units\":[{\"bright\":200,\"h\":0,\"s\":0,\"temperature\":0,\"unit_change_mode\":\"static\",\"unit_gradient_duration\":13,\"unit_switch_duration\":14,\"v\":0}]}"
+        },
+        {
+          "code": "countdown_1",
+          "value": 0
+        },
+        {
+          "code": "control_data",
+          "value": ""
+        },
+        {
+          "code": "rhythm_mode",
+          "value": "AAAAAAA="
+        },
+        {
+          "code": "sleep_mode",
+          "value": "AAA="
+        },
+        {
+          "code": "wakeup_mode",
+          "value": "AAA="
+        }
+      ],
+      "sub": false,
+      "time_zone": "-07:00",
+      "uid": "az1578544170996a3Qu0",
+      "update_time": 1691691227,
+      "uuid": "422ccc4ad65172f9"
+    },
+    {
+      "active_time": 1607399888,
+      "biz_type": 18,
+      "category": "fs",
+      "create_time": 1607399888,
+      "icon": "smart/program_category_icon/fs.png",
+      "id": "8544458884f3eb7e7f54",
+      "ip": "24.119.254.172",
+      "lat": "34.6100",
+      "local_key": "57d9d73dde519894",
+      "lon": "-112.3300",
+      "model": "AF1S",
+      "name": "Dale's Fan",
+      "online": true,
+      "owner_id": "13191265",
+      "product_id": "km8pesogga58btnk",
+      "product_name": "Air circulator",
+      "status": [
+        {
+          "code": "switch",
+          "value": true
+        },
+        {
+          "code": "mode",
+          "value": "fresh"
+        },
+        {
+          "code": "fan_speed",
+          "value": "1"
+        },
+        {
+          "code": "switch_horizontal",
+          "value": "false"
+        },
+        {
+          "code": "switch_vertical",
+          "value": "false"
+        }
+      ],
+      "sub": false,
+      "time_zone": "-08:00",
+      "uid": "az1578544170996a3Qu0",
+      "update_time": 1691691226,
+      "uuid": "8544458884f3eb7e7f54"
+    },
+    {
+      "active_time": 1641405945,
+      "biz_type": 18,
+      "category": "cl",
+      "create_time": 1641405945,
+      "icon": "smart/product_icon/cl.png",
+      "id": "18307877483fda414d97",
+      "ip": "24.119.254.172",
+      "lat": "34.6100",
+      "local_key": "164a33cb9bc3eb61",
+      "lon": "-112.3300",
+      "model": "HC700TY",
+      "name": "CURTAIN SYSTEM",
+      "online": true,
+      "owner_id": "13191265",
+      "product_id": "5nmahqd6sqrkzgz1",
+      "product_name": "CURTAIN SYSTEM",
+      "status": [
+        {
+          "code": "percent_control",
+          "value": 0
+        },
+        {
+          "code": "control",
+          "value": "stop"
+        }
+      ],
+      "sub": false,
+      "time_zone": "-07:00",
+      "uid": "az1578544170996a3Qu0",
+      "update_time": 1691691225,
+      "uuid": "18307877483fda414d97"
+    },
+    {
+      "active_time": 1689472574,
+      "biz_type": 18,
+      "category": "dj",
+      "create_time": 1689472574,
+      "icon": "smart/icon/ay1526363067472WHq8d/815eee38d3cae9b4b2bc2cabeeed6e2d.png",
+      "id": "eb296f30b653c9ad1by7ro",
+      "ip": "160.2.197.253",
+      "lat": "34.6100",
+      "local_key": ";JLIv[eQ5e}!(CNe",
+      "lon": "-112.3300",
+      "model": "\u5f97\u90a6CW\u5927\u8d27",
+      "name": "10-PF D1",
+      "online": true,
+      "owner_id": "13191265",
+      "product_id": "cdy6tbsxmkvgjmyh",
+      "product_name": "Smart Bulb-SL20",
+      "status": [
+        {
+          "code": "switch_led",
+          "value": false
+        },
+        {
+          "code": "work_mode",
+          "value": "white"
+        },
+        {
+          "code": "bright_value_v2",
+          "value": 50
+        },
+        {
+          "code": "temp_value_v2",
+          "value": 44
+        },
+        {
+          "code": "scene_data_v2",
+          "value": "{\"scene_num\":1,\"scene_units\":[{\"bright\":200,\"h\":0,\"s\":0,\"temperature\":0,\"unit_change_mode\":\"static\",\"unit_gradient_duration\":13,\"unit_switch_duration\":14,\"v\":0}]}"
+        },
+        {
+          "code": "countdown_1",
+          "value": 0
+        },
+        {
+          "code": "control_data",
+          "value": ""
+        },
+        {
+          "code": "rhythm_mode",
+          "value": "AAAAAAA="
+        },
+        {
+          "code": "sleep_mode",
+          "value": "AAA="
+        },
+        {
+          "code": "wakeup_mode",
+          "value": "AAA="
+        }
+      ],
+      "sub": false,
+      "time_zone": "-07:00",
+      "uid": "az1578544170996a3Qu0",
+      "update_time": 1691691222,
+      "uuid": "49d8b3c77cff5f24"
+    }
+  ],
+  "success": true,
+  "t": 1691711792142,
+  "tid": "87bbe54037d911ee9fecaa50f188a4b0"
+}
