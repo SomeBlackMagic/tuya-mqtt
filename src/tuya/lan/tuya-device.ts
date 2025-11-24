@@ -10,8 +10,9 @@ const debugError = require('debug')('tuya-mqtt:error');
 
 import { Logger } from '@nestjs/common';
 import {BaseDeviceDefinition, DeviceDriverCallbacks} from "../devices/base-device-definition";
-import {DeviceDriverFactory} from "../devices/device-driver.factory";
+
 import {LocalDeviceConfig} from "./interfaces/lan.interface";
+import {DeviceDefinitionFactory} from "../devices/device-definition.factory";
 
 export class TuyaDevice {
   private readonly logger = new Logger('TuyaDevice');
@@ -37,7 +38,7 @@ export class TuyaDevice {
       private readonly eventEmitter: EventEmitter2
   ) {
 
-    this.deviceDriver = DeviceDriverFactory.createDriver(this.config, this.initializeDeviceDriver());
+    this.deviceDriver = DeviceDefinitionFactory.createDefinition(this.config, this.initializeDeviceDriver());
     this.stateHandler = new DeviceStateHandler(this.config.deviceId);
     this.connectionHandler = new DeviceConnectionHandler({
       id: config.deviceId,

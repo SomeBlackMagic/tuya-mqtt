@@ -5,7 +5,6 @@ import { TuyaConfigProvider } from './config/tuya-config.provider';
 import { BridgeConfigProvider } from './bridge/config/bridge-config.provider';
 import { HomeAssistantService } from '../homeassistant/homeassistant.service';
 import { TuyaDevice } from './lan/tuya-device';
-import {DeviceDriverFactory} from "./devices/device-driver.factory";
 
 const debug = require('debug')('tuya-mqtt:tuyaservice');
 

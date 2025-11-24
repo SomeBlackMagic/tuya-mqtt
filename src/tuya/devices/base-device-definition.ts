@@ -1,17 +1,24 @@
-import {DeviceDefinitionCallbacks, DeviceMessageRoute} from "../messaging/messaging.types";
+import { DeviceDefinitionCallbacks, DeviceMessageRoute } from '../messaging/messaging.types';
 import {
   DeviceFirmwareInfo,
   DeviceFunctionalData,
   DeviceMetadata,
   DeviceNetworkInfo,
-  DpsSchemaItem
-} from "../types/tuya.types";
+  DpsSchemaItem,
+} from '../types/tuya.types';
+import {
+  DeviceStateManager,
+  DeviceRouteManager,
+  DeviceCommandProcessor,
+  DpsValue,
+  DpsState,
+} from './managers';
 
 const debug = require('debug')('tuya-mqtt:device');
 
 // Export types for backward compatibility
 export type DeviceTopicDefinition = DeviceMessageRoute;
-export type {DeviceDefinitionCallbacks};
+export type { DeviceDefinitionCallbacks };
 export type DeviceDriverCallbacks = DeviceDefinitionCallbacks;
 
 /**
@@ -20,116 +27,51 @@ export type DeviceDriverCallbacks = DeviceDefinitionCallbacks;
  * Works through callbacks to TuyaDevice instead of direct EventEmitter access
  */
 export abstract class BaseDeviceDefinition {
-  // protected state: Record<string, any> = {};
-
   protected callbacks: DeviceDefinitionCallbacks;
 
-  // Device information from Tuya (3, 4, 5, 6)
-  private functionalData: DeviceFunctionalData;
-
+  // Device information from Tuya
   protected networkInfo: DeviceNetworkInfo;
   protected firmwareInfo: DeviceFirmwareInfo;
   protected metadata: DeviceMetadata;
+  private functionalData: DeviceFunctionalData;
 
-  // Device-specific route mappings
-  protected deviceRoutes: Record<string, DeviceTopicDefinition> = {};
+  // Managers for separated concerns
+  protected stateManager: DeviceStateManager;
+  protected routeManager: DeviceRouteManager;
+  protected commandProcessor: DeviceCommandProcessor;
 
 
-  constructor(
-    callbacks: DeviceDriverCallbacks,
-  ) {
+  constructor(callbacks: DeviceDriverCallbacks) {
     this.callbacks = callbacks;
 
-    this.firmwareInfo = {
-      // protocolVersion: config.version,
-    };
+    this.firmwareInfo = {};
 
-    // Initialize device information structures
     this.networkInfo = {
       connectionStatus: 'offline',
-      // ip: config.ip,
     };
 
     this.functionalData = {
-      dpsSchema: {
-        1: {
-          id: 1,
-          code: 'switch',
-          name: 'Power Switch',
-          type: 'Boolean',
-          mode: 'rw',
-        },
-        2: {
-          id: 2,
-          code: 'countdown',
-          name: 'Countdown',
-          type: 'Integer',
-          mode: 'rw',
-          unit: 's',
-        },
-        3: {
-          id: 3,
-          code: 'mode',
-          name: 'Mode',
-          type: 'Enum',
-          mode: 'rw',
-        },
-        4: {
-          id: 4,
-          code: 'battery_percentage',
-          name: 'Battery Percentage',
-          type: 'Integer',
-          mode: 'ro',
-          unit: '%',
-        },
-        9: {
-          id: 9,
-          code: 'countdown_1',
-          name: 'Countdown Timer',
-          type: 'Integer',
-          mode: 'rw',
-          unit: 's',
-        },
-        20: {
-          id: 20,
-          code: 'switch_1',
-          name: 'Switch 1',
-          type: 'Boolean',
-          mode: 'rw',
-        },
-        21: {
-          id: 21,
-          code: 'switch_2',
-          name: 'Switch 2',
-          type: 'Boolean',
-          mode: 'rw',
-        },
-        22: {
-          id: 22,
-          code: 'switch_3',
-          name: 'Switch 3',
-          type: 'Boolean',
-          mode: 'rw',
-        },
-        38: {
-          id: 38,
-          code: 'relay_status',
-          name: 'Power-on Behavior',
-          type: 'Enum',
-          mode: 'rw',
-          values: {off: 'Off', on: 'On', memory: 'Memory'},
-        },
-        40: {
-          id: 40,
-          code: 'child_lock',
-          name: 'Child Lock',
-          type: 'Boolean',
-          mode: 'rw',
-        },
-      },
+      dpsSchema: {},
       standardFunctions: [],
       customFunctions: [],
     };
+
+    // Initialize managers
+    this.stateManager = new DeviceStateManager();
+
+    this.routeManager = new DeviceRouteManager(
+      this.stateManager,
+      (route: string, message: string, retain?: boolean) => {
+        this.callbacks.publishMessage(route, message, retain);
+      },
+    );
+
+    this.commandProcessor = new DeviceCommandProcessor(
+      this.routeManager,
+      (dpsKey: string | number, value: DpsValue) => {
+        this.callbacks.sendCommand(dpsKey, value);
+      },
+    );
   }
 
   /**
@@ -142,70 +84,16 @@ export abstract class BaseDeviceDefinition {
    */
   updateState(dpsData: Record<string, any>): void {
     debug('Received device state update:', dpsData);
-    debug('Current deviceRoutes:', Object.keys(this.deviceRoutes));
 
-    // Merge new DPS values into existing state
-    Object.keys(dpsData).forEach((dpsKey) => {
-      this.state[dpsKey] = dpsData[dpsKey];
-    });
-
-    // debug('Current state after update:', this.state);
-
-    // Publish states only for routes that were updated
-    Object.keys(this.deviceRoutes).forEach((route) => {
-      const routeDef = this.deviceRoutes[route];
-      const dpsKey = String(routeDef.key);
-      debug(`Checking route ${route} with DPS key ${routeDef.key} (as string: "${dpsKey}")`);
-      debug(`DPS data keys:`, Object.keys(dpsData));
-
-      if (
-        dpsData.hasOwnProperty(dpsKey) ||
-        dpsData.hasOwnProperty(routeDef.key)
-      ) {
-        debug(`Publishing state for route ${route}`);
-        this.publishState(route);
-      }
-    });
+    const updatedKeys = this.stateManager.updateState(dpsData);
+    this.routeManager.publishUpdatedStates(updatedKeys);
   }
 
   /**
    * Publish state for a specific route
    */
   protected publishState(route: string): void {
-    const routeDef = this.deviceRoutes[route];
-    if (!routeDef) {
-      debug(`No route definition found for ${route}`);
-      return;
-    }
-
-    // Try both numeric and string keys since DPS keys can come as either
-    const dpsKey = String(routeDef.key);
-    const dpsValue = this.state[dpsKey] ?? this.state[routeDef.key];
-
-    debug(
-      `Getting state for route ${route}, DPS key ${routeDef.key}: ${dpsValue}`,
-    );
-    debug(`Current state keys:`, Object.keys(this.state));
-
-    if (dpsValue === undefined) {
-      debug(
-        `No value found for DPS key ${routeDef.key} (tried both ${routeDef.key} and "${dpsKey}")`,
-      );
-      return;
-    }
-
-    let publishValue: string;
-
-    if (routeDef.type === 'bool') {
-      publishValue = dpsValue ? 'ON' : 'OFF';
-    } else if (routeDef.type === 'enum') {
-      publishValue = String(dpsValue);
-    } else {
-      publishValue = String(dpsValue);
-    }
-
-    debug(`Publishing state to ${route}: ${publishValue}`);
-    this.callbacks.publishMessage(route, publishValue);
+    this.routeManager.publishState(route);
   }
 
   /**
@@ -213,29 +101,7 @@ export abstract class BaseDeviceDefinition {
    * Returns true if command was handled, false otherwise
    */
   processCommand(message: string, commandRoute: string): boolean {
-    const routeDef = this.deviceRoutes[commandRoute];
-    if (!routeDef) {
-      return false;
-    }
-
-    debug(`Processing command for route ${commandRoute}: ${message}`);
-
-    let dpsValue: any;
-
-    if (routeDef.type === 'bool') {
-      dpsValue = message === 'ON' || message === 'true' || message === '1';
-    } else if (routeDef.type === 'int') {
-      dpsValue = parseInt(message, 10);
-    } else if (routeDef.type === 'float') {
-      dpsValue = parseFloat(message);
-    } else if (routeDef.type === 'enum') {
-      dpsValue = message;
-    } else {
-      dpsValue = message;
-    }
-
-    this.sendTuyaCommand(dpsValue, routeDef);
-    return true;
+    return this.commandProcessor.processCommand(message, commandRoute);
   }
 
   // Backward compatibility alias
@@ -266,7 +132,7 @@ export abstract class BaseDeviceDefinition {
    * Get all device routes
    */
   getDeviceRoutes(): string[] {
-    return Object.keys(this.deviceRoutes);
+    return this.routeManager.getAllRouteNames();
   }
 
   // Backward compatibility alias
@@ -274,39 +140,97 @@ export abstract class BaseDeviceDefinition {
     return this.getDeviceRoutes();
   }
 
+  /**
+   * Register a device route
+   */
+  protected registerRoute(routeName: string, route: DeviceMessageRoute): void {
+    this.routeManager.registerRoute(routeName, route);
+  }
 
-  // ------------- NEW--------
+  /**
+   * Register multiple routes at once
+   */
+  protected registerRoutes(routes: Record<string, DeviceMessageRoute>): void {
+    this.routeManager.registerRoutes(routes);
+  }
+
+  // ------------- Functional Data Management Methods -------------
+
+  /**
+   * Register DPS schema item
+   */
   protected registerFunctionalDataDpsSchema(id: number, dpsSchema: DpsSchemaItem): void {
-    // @ts-ignore
-    if (this.functionalData.dpsSchema[id] !== undefined) {
+    if (this.functionalData.dpsSchema?.[id] !== undefined) {
+      debug(`DPS schema ${id} already exists, skipping registration`);
       return;
     }
-    // @ts-ignore
+
+    if (!this.functionalData.dpsSchema) {
+      this.functionalData.dpsSchema = {};
+    }
+
     this.functionalData.dpsSchema[id] = dpsSchema;
+    debug(`Registered DPS schema: ${id}`, dpsSchema);
   }
 
+  /**
+   * Get DPS schema item
+   */
   protected getFunctionalDataDpsSchema(id: number): DpsSchemaItem | null {
-    // @ts-ignore
-    return this.functionalData.dpsSchema[id] ?? null;
+    return this.functionalData.dpsSchema?.[id] ?? null;
   }
 
-  protected registerFunctionalDataStandardFunctions(functions: string[]) {
+  /**
+   * Register standard functions
+   */
+  protected registerFunctionalDataStandardFunctions(functions: string[]): void {
     functions.forEach((functionName) => {
-      if (this.functionalData.standardFunctions?.includes(functionName)) {
-        this.functionalData.standardFunctions?.push(functionName)
+      if (!this.functionalData.standardFunctions?.includes(functionName)) {
+        this.functionalData.standardFunctions?.push(functionName);
+        debug(`Registered standard function: ${functionName}`);
       } else {
-        debug(`StandardFunction ${functionName} already exists`)
+        debug(`Standard function ${functionName} already exists`);
       }
-    })
+    });
   }
 
-  protected registerFunctionalDataCustomFunctions(functions: string[]) {
+  /**
+   * Register custom functions
+   */
+  protected registerFunctionalDataCustomFunctions(functions: string[]): void {
     functions.forEach((functionName) => {
-      if (this.functionalData.customFunctions?.includes(functionName)) {
-        this.functionalData.customFunctions?.push(functionName)
+      if (!this.functionalData.customFunctions?.includes(functionName)) {
+        this.functionalData.customFunctions?.push(functionName);
+        debug(`Registered custom function: ${functionName}`);
       } else {
-        debug(`CustomFunction ${functionName} already exists`)
+        debug(`Custom function ${functionName} already exists`);
       }
-    })
+    });
+  }
+
+  // ------------- Backward Compatibility Getters -------------
+
+  /**
+   * Access to internal state (for backward compatibility)
+   * @deprecated Use stateManager directly in subclasses
+   */
+  protected get state(): DpsState {
+    return this.stateManager.getAllState();
+  }
+
+  /**
+   * Access to device routes (for backward compatibility)
+   * @deprecated Use routeManager directly in subclasses
+   */
+  protected get deviceRoutes(): Record<string, DeviceMessageRoute> {
+    return this.routeManager.getAllRoutes();
+  }
+
+  /**
+   * Set device routes (for backward compatibility)
+   * @deprecated Use registerRoute/registerRoutes instead
+   */
+  protected set deviceRoutes(routes: Record<string, DeviceMessageRoute>) {
+    this.routeManager.registerRoutes(routes);
   }
 }
