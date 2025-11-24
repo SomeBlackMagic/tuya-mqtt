@@ -1,3 +1,5 @@
+# THIS PROJECT IS NOT FINISHED YET
+
 This is a fork of https://github.com/TheAgentK/tuya-mqtt and https://github.com/Ilia-SB/tuya-mqtt modified to work with devices connected via tuya-hub. Only tested with a small number of devices I own.
 I changed the mqtt topic names structure, so compatibility might be broken. It also relies on my fork of TuyAPI.
 Otherwise, I tried to keep it compatible with the original version.
@@ -50,7 +52,7 @@ cp config.json.sample config.json
 ```
 Edit config.json with your MQTT broker settings and save:
 ```
-nano config.json 
+nano config.json
 ```
 
 ### Setting up devices.json:
@@ -113,7 +115,7 @@ If the device name was not available in the devices.conf file, tuya-mqtt falls b
 ```
 tuya/86435357d8b123456789/
 ```
-All additional state/command topics are then built below this level. You can view the connectivity status of the device using the status topic, which reports online/offline based on whether tuya-mqtt has an active connection to the device or not.  The script monitors both the device socket connection for errors and also device heartbeats, to report proper status. 
+All additional state/command topics are then built below this level. You can view the connectivity status of the device using the status topic, which reports online/offline based on whether tuya-mqtt has an active connection to the device or not.  The script monitors both the device socket connection for errors and also device heartbeats, to report proper status.
 ```
 tuya/kitchen_table/state --> online/offline
 ```
